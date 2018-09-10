@@ -16,6 +16,8 @@ playerCharacter = [] #dictionary key: player's number, value: his character
 @client.event
 async def on_message(message):
     global channel
+    global members
+    members = message.server.members
     channel = message.channel
 
     if message.content.lower() == "start" and not started: #if the message is "started and the game isn't
@@ -25,11 +27,11 @@ async def on_message(message):
 def distributeCharacters():
     started = True
     aMembers = 0
-    members = discord.Server.members  # all members
 
-    for a in members: #shit
+    for a in members:
         aMembers += 1
 
+    print(aMembers)
     occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
     playerCharacter = [None for a in range(aMembers - 1)]
 
