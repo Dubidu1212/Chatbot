@@ -1,8 +1,9 @@
 import logging
+import discord
 
 logging.basicConfig(level=logging.INFO)
 
-def main(){
+def main():
+    pass
 
-}
 main()
