@@ -7,10 +7,10 @@ import asyncio
 logging.basicConfig(level = logging.INFO)
 client = discord.Client()
 
-server = discord.Server
 started = False
 characters = ["Seer", "Witch", "Cupid", "Hunter", "Midwife", "Priest", "Village bicycle"] #num 0: werewolf, num 8: villager
 players = {} #dictionary key: player's id, value: player's number
+memberDict = {}
 playerCharacter = [] #dictionary key: player's number, value: his character
 
 @client.event
@@ -24,8 +24,12 @@ async def on_message(message):
 
 def distributeCharacters():
     started = True
-    aMembers = server.member_count  # number of members
-    members = server.members  # all members
+    aMembers = 0
+    members = discord.Server.members  # all members
+
+    for a in members:
+        aMembers += 1
+
     occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
     playerCharacter = [None for a in range(aMembers - 1)]
 
@@ -38,6 +42,7 @@ def distributeCharacters():
 
     for a in members:
         players[a.id] = count  # assign a number to each player
+        memberDict[a.id] = a
         ran = random.randint(0, aMembers - 1)  # pick a random role for this player
 
         while occupated[ran]:  # if this roll is already taken, look for another one
