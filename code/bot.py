@@ -1,6 +1,7 @@
 import logging
 import discord
 import asyncio
+import secrets
 
 logging.basicConfig(level=logging.INFO)
 client = discord.Client()
@@ -11,7 +12,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    
+
 @client.event
 async def on_message(message):
     if message.content.startswith('!test'):
@@ -26,4 +27,4 @@ async def on_message(message):
         await asyncio.sleep(5)
         await client.send_message(message.channel, 'Done sleeping')
 
-client.run('token')
+client.run(secrets.username,secrets.password)
