@@ -27,7 +27,7 @@ def distributeCharacters():
     aMembers = 0
     members = discord.Server.members  # all members
 
-    for a in members:
+    for a in members: #shit
         aMembers += 1
 
     occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
