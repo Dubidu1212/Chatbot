@@ -9,7 +9,7 @@ client = discord.Client()
 
 server = discord.Server
 started = False
-characters = ["Seer", "Witch", "Cupid", "Hunter", "Midwife", "Priest", "Village bicycle"]
+characters = ["Seer", "Witch", "Cupid", "Hunter", "Midwife", "Priest", "Village bicycle"] #num 0: werewolf, num 8: villager
 players = {} #dictionary key: player's id, value: player's number
 playerCharacter = [] #dictionary key: player's number, value: his character
 
@@ -30,7 +30,7 @@ def distributeCharacters():
     playerCharacter = [None for a in range(aMembers - 1)]
 
     if aMembers < 5:  # there must be at least 5 players
-        print("Not enough players")
+        client.send_message(channel, "Not enough players")
         return
 
     aWerewolfs = int(round(aMembers * 0.3, 0))  # number of werewolfs (30%)
@@ -50,7 +50,7 @@ def distributeCharacters():
         elif ran <= aWerewolfs:
             (playerCharacter[0]).append(count)
         else:
-            playerCharacter[characters[ran]] = ran
+            playerCharacter[characters[ran] - aWerewolfs] = ran
 
         count += 1
 
