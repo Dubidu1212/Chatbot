@@ -27,6 +27,7 @@ def distributeCharacters():
     aMembers = server.member_count  # number of members
     members = server.members  # all members
     occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
+    playerCharacter = [None for a in range(aMembers - 1)]
 
     if aMembers < 5:  # there must be at least 5 players
         print("Not enough players")
