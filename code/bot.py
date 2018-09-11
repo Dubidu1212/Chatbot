@@ -272,7 +272,7 @@ async def on_message(message):
                 PriestActive = False
         elif MidwifeActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[6][0]]:
-
+                #yolo
                 twins = list(map(int,message.content.split(" ")))
                 #send message to twins so they know who is their twins
                 await client.send_message(memberDict[numToId[twins[0]]],"your twin is " + memberDict[numToId[twins[1]]].name)
