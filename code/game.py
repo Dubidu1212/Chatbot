@@ -27,8 +27,13 @@ async def on_message(message):
 def distributeCharacters():
     started = True
     aMembers = 0
+<<<<<<< Updated upstream
 
     for a in members:
+=======
+    members = discord.Server.members  # all members
+    for a in members: #shit
+>>>>>>> Stashed changes
         aMembers += 1
 
     print(aMembers)
