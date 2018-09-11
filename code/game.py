@@ -8,47 +8,44 @@ logging.basicConfig(level = logging.INFO)
 client = discord.Client()
 
 started = False
-characters = ["Seer", "Witch", "Cupid", "Hunter", "Priest", "Midwife", "Village bicycle"] #num 0: werewolf, num 8: villager
+characters = ["Seer", "Cupid", "Witch", "Hunter", "Priest", "Midwife", "Village bicycle"] #num 0: werewolf, num 8: villager
 players = {} #dictionary key: player's id, value: player's number
-memberDict = {}
-playerCharacter = [] #dictionary key: player's number, value: his character
+numToId = {} #dictionary key: player's number, value: player's
+memberDict = {} #key: id, value: member
+playerCharacter = [] #index 1: index of character
 
 @client.event
 async def on_message(message):
     global channel
     global members
-    members = message.server.members
+    members = message.server.members #members
     channel = message.channel
 
-    if message.content.lower() == "start" and not started: #if the message is "started and the game isn't
-                                                                  # started yet, start it
-        distributeCharacters()
+    if message.content.lower() == "start" and not started: #if the message is "started and the game isn't started yet, start it
+        await client.send_message(channel, distributeCharacters())
+        await asyncio.sleep(3)
+        await story()
 
-def distributeCharacters():
+
+async def distributeCharacters():
     started = True
     aMembers = 0
-<<<<<<< Updated upstream
 
     for a in members:
-=======
-    members = discord.Server.members  # all members
-    for a in members: #shit
->>>>>>> Stashed changes
         aMembers += 1
 
-    occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
-    playerCharacter = [[] for a in range(aMembers - 1)]
+    occupated = [False for a in range(aMembers)]  # store the characters which are already taken
+    playerCharacter = [[] for a in range(aMembers)]
 
     if aMembers < 5:  # there must be at least 5 players
-        client.send_message(channel, "Not enough players")
-        return
+        return "Not enough players"
 
     aWerewolfs = int(round(aMembers * 0.3, 0))  # number of werewolfs (30%)
     count = 0
 
     for a in members:
-        print("Works")
         players[a.id] = count  # assign a number to each player
+        numToId[count] = a.id
         memberDict[a.id] = a
         ran = random.randint(0, aMembers - 1)  # pick a random role for this player
 
@@ -62,13 +59,15 @@ def distributeCharacters():
         elif ran <= aWerewolfs:
             (playerCharacter[0]).append(count)
         else:
-            playerCharacter[characters[ran] - aWerewolfs] = ran
+            playerCharacter[ran - aWerewolfs] = [count]
 
+        await client.send_message()
         count += 1
-        story() #an
 
-def story():
-    client.send_message(channel, "It turns night in our small village and all the villagers got to bed")
+    return "Roles distributed"
+
+async def story():
+    await client.send_message(channel, "It turns night in the small village and all the villagers fall asleep!")
     asyncio.sleep(3)
     client.send_message(somebody, "Cupid, wake up, it's time for love!")
     client.send_message(somebody, "Cupid, wake up, it's time for love!")
