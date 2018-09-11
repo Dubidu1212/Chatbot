@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="005f92e1-37c1-4b83-919f-344942e5b0c8" name="Default Changelist" comment="" />
+    <list default="true" id="005f92e1-37c1-4b83-919f-344942e5b0c8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/game.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,52 +16,52 @@
     <session id="-1369372080">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.6" value="3" />
-          <entry key="project.open.time.7" value="1" />
+          <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="py" value="4" />
+          <entry key="py" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="4" />
+          <entry key="Python" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="6798" />
+          <entry key="py" value="7127" />
           <entry key="txt" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="21" />
-          <entry key="Python" value="6798" />
+          <entry key="Python" value="7127" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="67" column="44" selection-start-line="67" selection-start-column="44" selection-end-line="67" selection-end-column="44" />
+            <state relative-caret-position="214">
+              <caret line="403" column="49" selection-start-line="403" selection-start-column="49" selection-end-line="403" selection-end-column="49" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -65,14 +69,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-568">
-              <caret line="117" column="19" selection-start-line="117" selection-start-column="19" selection-end-line="117" selection-end-column="19" />
+            <state relative-caret-position="338">
+              <caret line="164" column="146" lean-forward="true" selection-start-line="108" selection-end-line="164" selection-end-column="146" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <marker date="1536689690174" expanded="true" signature="6647:6649" ph="..." />
+                <marker date="1536690679460" expanded="true" signature="6600:6602" ph="..." />
               </folding>
             </state>
           </provider>
@@ -104,10 +108,23 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>ran</find>
-      <find>CupidActive</find>
       <find>print(playerCharacter)</find>
-      <find>print</find>
       <find>get_</find>
+      <find>story_first_night</find>
+      <find>+ 1</find>
+      <find>cupidMessage</find>
+      <find>global</find>
+      <find>N</find>
+      <find>print</find>
+      <find>print</find>
+      <find>dist</find>
+      <find>CupidActive</find>
+      <find>PriestActive</find>
+      <find>for</find>
+      <find>midwife</find>
+      <find>aRolls</find>
+      <find>pries</find>
+      <find>time</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -117,14 +134,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/code/secrets.py" />
-        <option value="$PROJECT_DIR$/code/bot.py" />
         <option value="$PROJECT_DIR$/code/game.py" />
+        <option value="$PROJECT_DIR$/code/bot.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
-    <option name="width" value="978" />
+    <option name="width" value="979" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -133,7 +150,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -150,6 +166,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -168,7 +185,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.game">
+  <component name="RunManager" selected="Python.bot">
     <configuration name="bot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Chatbot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -217,8 +234,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.game" />
         <item itemvalue="Python.bot" />
+        <item itemvalue="Python.game" />
       </list>
     </recent_temporary>
   </component>
@@ -265,12 +282,12 @@
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="1" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Version Control" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="Python Console" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -288,6 +305,22 @@
     <MESSAGE value="bug fixes" />
     <MESSAGE value="addded story" />
     <option name="LAST_COMMIT_MESSAGE" value="addded story" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/code/bot.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/code/bot.py</url>
+          <line>261</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Program Files/Python36/Lib/site-packages/discord/client.py">
@@ -307,23 +340,23 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/bot.py">
+    <entry file="file://$PROJECT_DIR$/code/game.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="67" column="44" selection-start-line="67" selection-start-column="44" selection-end-line="67" selection-end-column="44" />
+        <state relative-caret-position="338">
+          <caret line="164" column="146" lean-forward="true" selection-start-line="108" selection-end-line="164" selection-end-column="146" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
+            <marker date="1536690679460" expanded="true" signature="6600:6602" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/game.py">
+    <entry file="file://$PROJECT_DIR$/code/bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-568">
-          <caret line="117" column="19" selection-start-line="117" selection-start-column="19" selection-end-line="117" selection-end-column="19" />
+        <state relative-caret-position="214">
+          <caret line="403" column="49" selection-start-line="403" selection-start-column="49" selection-end-line="403" selection-end-column="49" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
-            <marker date="1536689690174" expanded="true" signature="6647:6649" ph="..." />
           </folding>
         </state>
       </provider>

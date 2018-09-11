@@ -29,10 +29,13 @@ async def on_message(message):
             return
         await asyncio.sleep(3)
         await story_first_night()
+        x = 0
 
-        #while something:
-        #    story_day()
-        #    story_night()
+        while x < 1:
+            story_night()
+            story_day()
+            x = 1
+
 
 
 async def distributeCharacters():
@@ -104,7 +107,6 @@ async def distributeCharacters():
     return "Roles distributed"
 
 async def story_first_night():
-    print(memberDict[numToId[playerCharacter[2][0]]])
     cupid = memberDict[numToId[playerCharacter[2][0]]]
 
     await client.send_message(channel, "It turns night in the small village and all the villagers fall asleep!")
@@ -112,7 +114,6 @@ async def story_first_night():
     await client.send_message(channel, "Cupid, wake up, it's time for love!")
     #await client.start_private_message(channelCupid)
     await client.send_message(cupid, "Choose a little sweet couple, which will have a romantic time together!")
-    print("Works so far")
     CupidActive = True
 
     if aRolls >= 6:
@@ -127,10 +128,9 @@ async def story_first_night():
             #await client.start_private_message(channelMidwife)
             await client.send_message(channelMidwife, "Look at those sweet villagers, which one do you want to make to twins?")
 
-    story_night()
-
 
 async def story_night():
+    print("Works so far")
     channelWerewolf = memberDict[numToId[playerCharacter[0][0]]]
     channelSeer = memberDict[numToId[playerCharacter[1][0]]]
     channelWitch = memberDict[numToId[playerCharacter[3][0]]]
