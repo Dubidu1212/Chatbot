@@ -1,1 +1,43 @@
 ===============HELP=================
+Rules:
+  You live in a small village each of the villagers gets distributed a rolle those roles are:Werwolf,Seer,Cupid,Witch,Hunter,Priest,Midwife,Village bicycle and normal villager
+
+Goals:
+  As every person besides werwolf the goal is to kill all the werwolfs.
+  For the werwolfs the goal is the opposite, their goal is to kill all the non-werwolf villagers
+The first night:
+  -Amor wakes up and makes two people fall in love
+  -Priest chooses someone to protect from Werewolfs
+  -Midwife chooses two people who become twins
+  -Same as every night
+
+Procedure:
+  A day in a village always has the same order:
+    -Village bicycle chooses where to spend the night
+    -Werewolfs choose their target
+    -Seer chooses to kill or to heal someone
+    -daybreak
+    -the villagers discover the killed
+    -a discussion starts over whom to execute
+Roles:
+  Werewolf:
+    Gets to choose with his friends a person to kill.
+    The goal is to kill all non-Werewolfs.
+  Seer:
+    Each night sees if a chosen person is a werewolf.
+  Cupid:
+    Chooses two people to fall in love.
+  Lover:
+    When one of the two dies the other one dies too.
+  Witch:
+    Gets to heal and/or kill someone.
+  Hunter:
+    Kills someone of his choice when he dies.
+  Priest:
+    Protects someone from ever dying during the night.
+  Midwife:
+    Gets to make two people twins.
+  Twin:
+    Dies when his twin dies, but doesn't die when he himself was suposed to die.
+  Village bycicle:
+    Spends her night in someone elses house. Therefore she doesn't die when she was suposed to, but she does die when the person who she is visiting dies.
