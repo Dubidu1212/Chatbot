@@ -8,7 +8,7 @@ logging.basicConfig(level = logging.INFO)
 client = discord.Client()
 
 started = False
-characters = ["Seer", "Witch", "Cupid", "Hunter", "Midwife", "Priest", "Village bicycle"] #num 0: werewolf, num 8: villager
+characters = ["Seer", "Witch", "Cupid", "Hunter", "Priest", "Midwife", "Village bicycle"] #num 0: werewolf, num 8: villager
 players = {} #dictionary key: player's id, value: player's number
 memberDict = {}
 playerCharacter = [] #dictionary key: player's number, value: his character
@@ -31,9 +31,8 @@ def distributeCharacters():
     for a in members:
         aMembers += 1
 
-    print(aMembers)
     occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
-    playerCharacter = [None for a in range(aMembers - 1)]
+    playerCharacter = [[] for a in range(aMembers - 1)]
 
     if aMembers < 5:  # there must be at least 5 players
         client.send_message(channel, "Not enough players")
@@ -43,6 +42,7 @@ def distributeCharacters():
     count = 0
 
     for a in members:
+        print("Works")
         players[a.id] = count  # assign a number to each player
         memberDict[a.id] = a
         ran = random.randint(0, aMembers - 1)  # pick a random role for this player
@@ -60,10 +60,12 @@ def distributeCharacters():
             playerCharacter[characters[ran] - aWerewolfs] = ran
 
         count += 1
+        story()
 
 def story():
     client.send_message(channel, "It turns night in our small village and all the villagers got to bed")
     asyncio.sleep(3)
-    client.send_message(channel, "Cupid, wake up, it's time for love!")
+    client.send_message(somebody, "Cupid, wake up, it's time for love!")
+    client.send_message(somebody, "Cupid, wake up, it's time for love!")
 
 client.run(secrets.username, secrets.password)
