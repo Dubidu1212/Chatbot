@@ -92,8 +92,10 @@ async def timer():#eventloop with updates all 1/10 of a second
     global CupidInfoSent
     global CupidActive
     global WinfoSent
+    global playerCharacter
+    global PriestActive
     while True:
-        global playerCharacter
+
         if CupidActive and not CupidInfoSent:  #Cupid-------------------------------------------------------------------Cupid
             print(playerCharacter)
             await client.send_message(memberDict[numToId[playerCharacter[2][0]]],cupidMessage)
@@ -195,6 +197,10 @@ async def kill(person,unnatural):#person: person to kill in form of PlayerNumber
 @client.event
 async def on_message(message):
     global CupidActive
+    global PriestActive
+    global MidwifeActive
+    global SeerActive
+    global HunterActive
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
     isPrivate = False
@@ -205,6 +211,9 @@ async def on_message(message):
         global channel
         global N
         global members
+        global couple
+        global twins
+        global blessed
         members = message.server.members #members
         channel = message.channel
 
@@ -247,20 +256,23 @@ async def on_message(message):
 
         elif CupidActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[2][0]]:#if is cupid
-                global couple
+
                 couple = list(map(int,message.content.split(" "))) #not checked for wrong input
-                #send message to twins so they know who is their twins
-                await client.send_message(memberDict[numToId[couple[0]]],"your love is " + memberDict[numToId[twins[1]]].name)
-                await client.send_message(memberDict[numToId[couple[1]]],"your love is " + memberDict[numToId[twins[0]]].name)
+                #send message to couple so they know who is their couple
+                #print(couple)
+
+                print(memberDict)
+                await client.send_message(memberDict[numToId[couple[0]]],"your love is " + memberDict[numToId[couple[1]]].name)
+                await client.send_message(memberDict[numToId[couple[1]]],"your love is " + memberDict[numToId[couple[0]]].name)
                 CupidActive = False
         elif PriestActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[5][0]]:
-                global blessed
+
                 blessed = int(message.content)
                 PriestActive = False
         elif MidwifeActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[6][0]]:
-                global twins
+
                 twins = list(map(int,message.content.split(" ")))
                 #send message to twins so they know who is their twins
                 await client.send_message(memberDict[numToId[twins[0]]],"your twin is " + memberDict[numToId[twins[1]]].name)
@@ -275,8 +287,8 @@ async def on_message(message):
                 await client.send_message(message.channel,memberDict[numToId[int(message.content)]].name + " is " + temps + "a werewolf")
                 SeerActive = False
         elif HunterActive:
-            if message.author.id == numToId[playerCharacter[][0]]:
-
+            if message.author.id == numToId[playerCharacter[4][0]]:
+                await kill(int(message.content),False)
 
     #if message.content.startswith():
     #    await client.send_message(message.channel,message.channel.name)
