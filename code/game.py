@@ -65,7 +65,7 @@ def distributeCharacters():
             playerCharacter[characters[ran] - aWerewolfs] = ran
 
         count += 1
-        story()
+        story() #an
 
 def story():
     client.send_message(channel, "It turns night in our small village and all the villagers got to bed")
