@@ -36,6 +36,14 @@ with open('../resources/help.txt', 'r') as myfile:
 
 ###
 
+def isInt(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+
 async def timer():#eventloop with updates all 1/10 of a second
     global CupidInfoSent
     global WinfoSent
@@ -48,7 +56,7 @@ async def timer():#eventloop with updates all 1/10 of a second
             s = ''.join(tempMessage)
             await client.send_message(memberDict[numToId[playerCharacters[2][0]]],s)
             CupidInfoSent = True
-
+        ###################################################################
         elif Wvoting and not WinfoSent:#Werwolfs
             for i in range(aWerewolfs):
                 tempMessage = []
@@ -104,9 +112,13 @@ async def on_message(message):
         elif Wvoting:# TODO: voting without mentions
             for i in range(aWerewolfs):
                 if(message.author.id == Werwolfs[i]):
-                    if(len(message.mentions)==1):
-                        WvotingList[i]-= 1
-                        Wvotes[players[message.raw_mentions[0]]]+=1
+                    if isInt(message.content):
+                        WvotingList[i] = True;
+                        Wvotes[int(message.content)]+=1
+
+                #    if(len(message.mentions)==1):
+                #        WvotingList[i]-= 1
+                #        Wvotes[players[message.raw_mentions[0]]]+=1
 
         elif CupidActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacters[2][0]]:#if is cupid
