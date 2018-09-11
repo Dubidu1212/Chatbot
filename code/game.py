@@ -36,9 +36,9 @@ async def distributeCharacters():
     for a in members:
         aMembers += 1
 
-    print(aMembers)
     occupated = [False for a in range(aMembers)]  # store the characters which are already taken
     playerCharacter = [[] for a in range(aMembers)]
+    print(playerCharacter)
 
     if aMembers < 5:  # there must be at least 5 players
         return "Not enough players"
@@ -57,7 +57,6 @@ async def distributeCharacters():
         while occupated[ran]:  # if this roll is already taken, look for another one
             ran = random.randint(0, aMembers - 1)
 
-        print(ran, ran - aWerewolfs)
         occupated[ran] = True
         privateChannel = client.get_channel(a.id)
 
@@ -66,28 +65,24 @@ async def distributeCharacters():
             if privateChannel is None:
                 privateChannel = await client.start_private_message(a)
             await client.send_message(privateChannel, "You're a Villager")
-            print("Villager")
 
         elif ran < aWerewolfs:
             list(playerCharacter[0]).append(count)
             if privateChannel is None:
                 privateChannel = await client.start_private_message(a)
-            await client.send_message(privateChannel, "You're a Werewolf " + str(ran))
-            print("Werewolf")
+            await client.send_message(privateChannel, "You're a Werewolf")
 
         else:
             playerCharacter[ran - aWerewolfs] = [count]
             if ran - aWerewolfs == 1:
                 if privateChannel is None:
                     privateChannel = await client.start_private_message(a)
-                await client.send_message(privateChannel, "You're Cupid " + str(ran))
-                print("Cupid")
+                await client.send_message(privateChannel, "You're Cupid")
             else:
                 if privateChannel is None:
                     privateChannel = await client.start_private_message(a)
 
-                await client.send_message(privateChannel, "You're the " + characters[ran - aWerewolfs] + " " + str(ran))
-                print("Other")
+                await client.send_message(privateChannel, "You're the " + characters[ran - aWerewolfs])
 
         count += 1
 
