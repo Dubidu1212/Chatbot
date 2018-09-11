@@ -4,6 +4,7 @@ import asyncio
 import random
 import time
 import secrets
+playerCharacter = [] #index 1: index of character
 
 #import vote
 
@@ -13,7 +14,7 @@ finishedSetup = True
 
 ###voting
 voting = False
-N = 2 #number players
+N = -1#number players
 votes = [0 for i in range(N)]
 AlreadyVoted = [False for i in range(N)]
 ###
@@ -36,7 +37,6 @@ characters = ["Seer", "Cupid", "Witch", "Hunter", "Priest", "Midwife", "Village 
 players = {} #dictionary key: player's id, value: player's number
 numToId = {} #dictionary key: player's number, value: player's id
 memberDict = {} #key: id, value: member
-playerCharacter = [] #index 1: index of character
 ###
 ###werewolf voting
 WinfoSent = False
@@ -59,11 +59,13 @@ async def timer():#eventloop with updates all 1/10 of a second
     global CupidActive
     global WinfoSent
     while True:
+        global playerCharacter
         if CupidActive and not CupidInfoSent:#Cupid
+            print(playerCharacter)
             await client.send_message(memberDict[numToId[playerCharacter[2][0]]],cupidMessage)
             tempMessage = []
             for i in range(N):
-                tempMessage.append(str(N+1) + ": " +memberDict[player[i]].name + "\n")
+                tempMessage.append(str(i+1) + ": " +memberDict[numToId[i]].name + "\n")
             s = ''.join(tempMessage)
             await client.send_message(memberDict[numToId[playerCharacter[2][0]]],s)
             CupidInfoSent = True
@@ -72,10 +74,12 @@ async def timer():#eventloop with updates all 1/10 of a second
             for i in range(aWerewolfs):
                 tempMessage = []
                 for i in range(N):
-                    tempMessage.append(str(N+1) + ": " +memberDict[player[i]].name + "\n")
+                    tempMessage.append(str(i+1) + ": " +memberDict[players[i]].name + "\n")
                 s = ''.join(tempMessage)
                 await client.send_message(memberDict[Werwolfs[i]],s)
             WinfoSent = True
+
+
         await asyncio.sleep(0.1)
 
 @client.event
@@ -99,6 +103,7 @@ async def WMessageRelay(message,sender,Werwolfs):#sends all messages to the werw
 
 @client.event
 async def on_message(message):
+    global CupidActive
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
     isPrivate = False
@@ -107,6 +112,7 @@ async def on_message(message):
     if(not isPrivate):#public messages
         ########game
         global channel
+        global N
         global members
         members = message.server.members #members
         channel = message.channel
@@ -114,7 +120,11 @@ async def on_message(message):
         if message.content.lower() == "start" and not started: #if the message is "started and the game isn't started yet, start it
             mes = await distributeCharacters()
             await client.send_message(channel, mes)
+            if mes == "Not enough players":
+                return
             await asyncio.sleep(3)
+
+            CupidActive = True
         ##########
         if(voting):
 
@@ -122,7 +132,7 @@ async def on_message(message):
                 AlreadyVoted[players[message.author.id]] = True
                 votes[players[message.raw_mentions[0]]]+=1
     else:#private messages
-        global CupidActive
+
         if(message.content.lower()=="!help"):
             await client.send_message(message.channel,str(helpmessage))
         if(Wdisc):
@@ -146,28 +156,33 @@ async def on_message(message):
 
         elif CupidActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[2][0]]:#if is cupid
-                couple = message.content.split(" ")#not checked for wrong input
+                global couple
+                couple = list(map(int,message.content.split(" "))) #not checked for wrong input
+                print(couple)
+                print("---")
                 CupidActive = False
 
     #if message.content.startswith():
     #    await client.send_message(message.channel,message.channel.name)
 #####game
 async def distributeCharacters():
+    global playerCharacter
+    global N
     started = True
     aMembers = 0
 
     for a in members:
         aMembers += 1
 
-    occupated = [False for a in range(aMembers)]  # store the characters which are already taken
-    playerCharacter = [[] for a in range(aMembers)]
+    occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
+    playerCharacter = [[] for a in range(aMembers - 1)]
+    N =  aMembers-1
     print(playerCharacter)
 
-    if aMembers < 5:  # there must be at least 5 players
+    if aMembers < 6:  # there must be at least 5 players
         return "Not enough players"
 
-    global aWerewolfs
-    aWerewolfs = int(round(aMembers * 0.3, 0))  # number of werewolfs (30%)
+    aWerewolfs = int(round((aMembers - 1) * 0.3, 0))  # number of werewolfs (30%)
     count = 0
 
     for a in members:
@@ -176,28 +191,39 @@ async def distributeCharacters():
         players[a.id] = count  # assign a number to each player
         numToId[count] = a.id
         memberDict[a.id] = a
-        ran = int(random.random() * time.time()) % aMembers  # pick a random role for this player
+        ran = int(random.random() * time.time()) % (aMembers - 1)  # pick a random role for this player
 
         while occupated[ran]:  # if this roll is already taken, look for another one
-            ran = random.randint(0, aMembers - 1)
+            ran = int(random.random() * time.time()) % (aMembers - 1)
 
         occupated[ran] = True
         privateChannel = client.get_channel(a.id)
 
         if ran >= 6 + aWerewolfs:
-            list(playerCharacter[8]).append(count)
+            if len(playerCharacter[8]) == 0:
+                playerCharacter[8] = [count]
+            else:
+                list(playerCharacter[8]).append(count)
+
             if privateChannel is None:
                 privateChannel = await client.start_private_message(a)
             await client.send_message(privateChannel, "You're a Villager")
 
         elif ran < aWerewolfs:
-            list(playerCharacter[0]).append(count)
+            if len(playerCharacter[0]) == 0:
+                #print("Creating werewolf list")
+                playerCharacter[0] = [count]
+            else:
+                #print("add werewolf")
+                playerCharacter[0].append(count)
+
             if privateChannel is None:
                 privateChannel = await client.start_private_message(a)
             await client.send_message(privateChannel, "You're a Werewolf")
 
         else:
-            playerCharacter[ran - aWerewolfs] = [count]
+            #print("add " + str(ran - aWerewolfs))
+            playerCharacter[ran - aWerewolfs + 1] = [count]
             if ran - aWerewolfs == 1:
                 if privateChannel is None:
                     privateChannel = await client.start_private_message(a)
@@ -209,15 +235,15 @@ async def distributeCharacters():
                 await client.send_message(privateChannel, "You're the " + characters[ran - aWerewolfs])
 
         count += 1
-        ####Addition
-        global CupidActive
-        CupidActive = True
+    print(playerCharacter)
 
-        aWerewolfs = len(playerCharacter[0]);
-        ####
+    ####Addition
 
-
+    ####
     return "Roles distributed"
+
+
+
 
 ######
 
