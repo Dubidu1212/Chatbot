@@ -2,7 +2,8 @@ import logging
 import discord
 import asyncio
 import secrets
-import vote
+
+#import vote
 
 logging.basicConfig(level=logging.INFO)
 client = discord.Client()
@@ -15,6 +16,7 @@ votes = [0 for i in range(N)]
 AlreadyVoted = [False for i in range(N)]
 ###
 ###werewolf voting
+WinfoSent = False
 Wvoting = False
 Wdisc = False #discussing
 aWerewolfs = 3 #anzahl wölfe
@@ -22,13 +24,40 @@ WvotingList = [False for i in range(aWerewolfs)]#AlreadyVoted of W
 Wvotes = [0 for i in range(N)]#people to kill
 ###
 ###Cupid
-CupidInfoSent = False#if list of people to select has been sent
-CupidActive = True #when cupid is active
+CupidInfoSent = False #if list of people to select has been sent
+CupidActive = False #when cupid is active
 couple = []#people die together
+cupidMessage = "Type the two numbers of your chosen ones seperated by a space please"
+###
+###Help
+helpmessage = ""
+with open('../resources/help.txt', 'r') as myfile:
+  helpmessage = myfile.read()
 
 ###
 
+async def timer():#eventloop with updates all 1/10 of a second
+    global CupidInfoSent
+    global WinfoSent
+    while True:
+        if CupidActive and not CupidInfoSent:#Cupid
+            await client.send_message(memberDict[numToId[playerCharacters[2][0]]],cupidMessage)
+            tempMessage = []
+            for i in range(N):
+                tempMessage.append(str(N+1) + ": " +memberDict[player[i]].name + "\n")
+            s = ''.join(tempMessage)
+            await client.send_message(memberDict[numToId[playerCharacters[2][0]]],s)
+            CupidInfoSent = True
 
+        elif Wvoting and not WinfoSent:#Werwolfs
+            for i in range(aWerewolfs):
+                tempMessage = []
+                for i in range(N):
+                    tempMessage.append(str(N+1) + ": " +memberDict[player[i]].name + "\n")
+                s = ''.join(tempMessage)
+                await client.send_message(memberDict[Werwolfs[i]],s)
+            WinfoSent = True
+        await asyncio.sleep(0.1)
 
 @client.event
 async def on_ready():
@@ -58,11 +87,13 @@ async def on_message(message):
         isPrivate = True
     if(not isPrivate):#public messages
         if(voting):
-            #await client.send_message(message.channel,isPrivate)
+
             if(( len(message.mentions)==1 ) and (not AlreadyVoted[players[message.author.id]])):#stops players from voting twice
                 AlreadyVoted[players[message.author.id]] = True
                 votes[players[message.raw_mentions[0]]]+=1
     else:#private messages
+        if(message.content.lower()=="!help"):
+            await client.send_message(message.channel,str(helpmessage))
         if(Wdisc):
             for i in range(aWerewolfs):
                 Werwolfs=[1,2,3]
@@ -77,10 +108,10 @@ async def on_message(message):
                         WvotingList[i]-= 1
                         Wvotes[players[message.raw_mentions[0]]]+=1
 
-        elif CupidActive:
+        elif CupidActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacters[2][0]]:#if is cupid
-
-
+                couple = message.content.split(" ")#not checked for wrong input
+                CupidActive = False
 
     #if message.content.startswith():
     #    await client.send_message(message.channel,message.channel.name)
@@ -88,5 +119,5 @@ async def on_message(message):
 
 
 
-
+client.loop.create_task(timer())
 client.run(secrets.username, secrets.password)
