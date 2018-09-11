@@ -98,7 +98,7 @@ async def distributeCharacters():
 
                 await client.send_message(privateChannel, "You're the " + characters[ran - aWerewolfs])
 
-        count += 1 #count
+        count += 1
 
     return "Roles distributed"
 
