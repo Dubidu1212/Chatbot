@@ -229,6 +229,13 @@ async def on_message(message):
     global SeerActive
     global HunterActive
     global BicycleActive
+    global channel
+    global N
+    global members
+    global couple
+    global twins
+    global blessed
+    global BicycleVisit
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
     isPrivate = False
@@ -236,13 +243,7 @@ async def on_message(message):
         isPrivate = True
     if(not isPrivate):#public messages
         ########game
-        global channel
-        global N
-        global members
-        global couple
-        global twins
-        global blessed
-        global BicycleVisit
+
         members = message.server.members #members
         channel = message.channel
 
@@ -278,9 +279,12 @@ async def on_message(message):
         elif Wvoting:# TODO: voting without mentions
             for i in range(aWerewolfs):
                 if(message.author.id == playerCharacter[0][i]):
-                    if isInt(message.content):
-                        WvotingList[i] = True
-                        Wvotes[int(message.content)]+=1
+                    if not testNumberOne(message.content):
+                        return
+                    WvotingList[i] = True
+                    Wvotes[int(message.content)]+=1
+
+
 
                 #    if(len(message.mentions)==1):
                 #        WvotingList[i]-= 1
@@ -289,8 +293,9 @@ async def on_message(message):
 
         elif CupidActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[2][0]]:#if is cupid
-
-                couple = list(map(int,message.content.split(" "))) #not checked for wrong input
+                if not testNumberpair(message.content):
+                    return
+                couple = list(map(int,message.content.split(" ")))
                 #send message to couple so they know who is their couple
 
                 for a in range(len(couple)):
@@ -302,6 +307,8 @@ async def on_message(message):
                 CupidActive = False
         elif PriestActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[5][0]]:
+                if not testNumberOne(message.content):
+                    return
                 blessed = int(message.content) - 1
                 if blessed == players[message.author.id]:
                     await client.send_message(message.channel, "Are you blessing yourself?? Christians should 'Love your neighbor as yourself'!")
@@ -312,6 +319,8 @@ async def on_message(message):
                 PriestActive = False
         elif MidwifeActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[6][0]]:
+                if not testNumberpair(message.content):
+                    return
                 twins = list(map(int,message.content.split(" ")))
 
                 for a in range(len(twins)):
@@ -325,16 +334,22 @@ async def on_message(message):
         elif SeerActive:
             if message.author.id == numToId[playerCharacter[1][0]]:
                 temps = "not "
+                if not testNumberOne(message.contentS):
+                    return
                 if int(message.content) - 1 in playerCharacter[0]:
                     temps = ""
                 await client.send_message(message.channel,memberDict[numToId[int(message.content)]].name + " is " + temps + "a werewolf")
                 SeerActive = False
         elif HunterActive:
             if message.author.id == numToId[playerCharacter[4][0]]:
+                if not testNumberOne(message.content):
+                    return
                 await client.send_message(message.channel, "With your last breath you shoot through %s's heart", memberDict[numToId[int(message.content)]].name)
                 await kill(int(int(message.content) - 1),False)
         elif BicycleActive:
             if message.author.id == numToId[playerCharacter[7][0]]:
+                if not testNumberOne(message.content):
+                    return
                 BicycleVisit = int(message.content) - 1
                 await client.send_message(message.channel,":smirk:")
     #if message.content.startswith():
