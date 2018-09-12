@@ -42,14 +42,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="7581" />
+          <entry key="py" value="7737" />
           <entry key="txt" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="45" />
-          <entry key="Python" value="7581" />
+          <entry key="Python" value="7737" />
         </counts>
       </usages-collector>
     </session>
@@ -59,11 +59,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="151" column="74" selection-start-line="151" selection-start-column="74" selection-end-line="151" selection-end-column="74" />
+            <state relative-caret-position="231">
+              <caret line="61" column="13" lean-forward="true" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <marker date="1536736351783" expanded="true" signature="2209:2211" ph="..." />
+                <marker date="1536739988572" expanded="true" signature="2209:2211" ph="..." />
               </folding>
             </state>
           </provider>
@@ -86,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/code/secrets.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="42" selection-start-column="42" selection-end-column="42" />
+              <caret column="69" selection-start-column="69" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -107,17 +107,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ran</find>
-      <find>print(playerCharacter)</find>
-      <find>get_</find>
-      <find>story_first_night</find>
-      <find>+ 1</find>
       <find>global</find>
       <find>N</find>
       <find>dist</find>
-      <find>PriestActive</find>
       <find>for</find>
-      <find>midwife</find>
       <find>aRolls</find>
       <find>pries</find>
       <find>time</find>
@@ -133,9 +126,17 @@
       <find>PriestAc</find>
       <find>started</find>
       <find>players</find>
-      <find>print</find>
       <find>CupidAct</find>
       <find>aMembers</find>
+      <find>bless</find>
+      <find>story_f</find>
+      <find>midwife</find>
+      <find>PriestActive</find>
+      <find>while</find>
+      <find>[</find>
+      <find>roun</find>
+      <find>print</find>
+      <find>Village b</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,8 +145,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/code/secrets.py" />
         <option value="$PROJECT_DIR$/code/game.py" />
+        <option value="$PROJECT_DIR$/code/secrets.py" />
         <option value="$PROJECT_DIR$/code/bot.py" />
       </list>
     </option>
@@ -289,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536695733459</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="bug fixes Priest">
+      <created>1536736451731</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1536736451731</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -323,7 +331,8 @@
     <MESSAGE value="bug fixes" />
     <MESSAGE value="addded story" />
     <MESSAGE value="bug fixes Cupid &amp; Priest" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixes Cupid &amp; Priest" />
+    <MESSAGE value="bug fixes Priest" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes Priest" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -349,17 +358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/bot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="151" column="74" selection-start-line="151" selection-start-column="74" selection-end-line="151" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <marker date="1536736351783" expanded="true" signature="2209:2211" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2703">
@@ -371,15 +369,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/secrets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="42" selection-start-column="42" selection-end-column="42" />
+          <caret column="69" selection-start-column="69" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/code/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="61" column="13" lean-forward="true" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1536739988572" expanded="true" signature="2209:2211" ph="..." />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

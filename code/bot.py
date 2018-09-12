@@ -60,7 +60,7 @@ with open('../resources/help.txt', 'r') as myfile:
 N = 0
 started = False
 characters = ["Seer", "Cupid", "Witch", "Hunter", "Priest", "Midwife",
-              "Village bicycle"]  # num 0: werewolf, num 8: villager
+              "Village Bicycle"]  # num 0: werewolf, num 8: villager
 players = {}  # dictionary key: player's id, value: player's number
 numToId = {}  # dictionary key: player's number, value: player's id
 memberDict = {}  # key: id, value: member
@@ -239,8 +239,8 @@ async def on_message(message):
             x = 0
 
             while x < 1:
-                story_night()
-                story_day()
+                await story_night()
+                await story_day()
                 x = 1
         ##########
         if(voting):
@@ -288,6 +288,7 @@ async def on_message(message):
             if message.author.id == numToId[playerCharacter[5][0]]:
 
                 blessed = int(message.content) - 1
+                print(blessed + 1)
                 PriestActive = False
         elif MidwifeActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[6][0]]:
@@ -329,16 +330,21 @@ async def distributeCharacters():
     for a in members:
         aMembers += 1
 
-    occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
-
     if aMembers < 6:  # there must be at least 5 players
         return "Not enough players"
 
-    aWerewolfs = int(round((aMembers - 1) * 0.3, 0))  # number of werewolfs (30%)
-    playerCharacter = [[] for a in range(aMembers - aWerewolfs)]
-    aRolls = aMembers - aWerewolfs - 1
+    aWerewolfs = int(round((aMembers - 1) * 0.3))  # number of werewolfs (30%)
+    aRolls = aMembers - aWerewolfs
+
+    if aRolls > 9:
+        aRolls = 9
+
+    playerCharacter = [[] for a in range(aRolls)]
+    occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
+
     N = aMembers - 1
     count = 0
+    print(aMembers, aRolls, aWerewolfs, len(playerCharacter))
 
     for a in members:
         if a.id == client.user.id:
@@ -347,14 +353,16 @@ async def distributeCharacters():
         numToId[count] = a.id
         memberDict[a.id] = a
         ran = int(random.random() * datetime.now().microsecond) % (aMembers - 1)  # pick a random role for this player
+        print(occupated, ran)
 
         while occupated[ran]:  # if this roll is already taken, look for another one
             ran = int(random.random() * datetime.now().microsecond) % (aMembers - 1)
+            print(ran)
 
         occupated[ran] = True
-        privateChannel = client.get_channel(a.id)
 
-        if ran >= 6 + aWerewolfs:
+        if ran >= 7 + aWerewolfs:
+            print("why")
             if len(playerCharacter[8]) == 0:
                 playerCharacter[8] = [count]
             else:
@@ -418,7 +426,6 @@ async def story_first_night():
         #await client.start_private_message(channelPriest)
         await client.send_message(channelPriest, "Choose someone, who will be blessed for all nights!")
         PriestActive = True
-        print(PriestActive)
 
 
         if aRolls >= 7 - aWerewolfs:
@@ -430,11 +437,12 @@ async def story_first_night():
             await client.send_message(channel, "Some babys are born, they would be cute twins, Midwife.")
             #await client.start_private_message(channelMidwife)
             await client.send_message(channelMidwife, "Look at those sweet villagers, which one do you want to make to twins?")
+            MidwifeActive = True
 
 
 async def story_night():
     print("Works so far")
-    channelWerewolf = memberDict[numToId[playerCharacter[0][0]]]
+    channelWerewolf = [memberDict[numToId[playerCharacter[0][0]]]]
     channelSeer = memberDict[numToId[playerCharacter[1][0]]]
     channelWitch = memberDict[numToId[playerCharacter[3][0]]]
 
@@ -469,4 +477,4 @@ async def story_day():
 #####
 
 client.loop.create_task(timer())
-client.run(secrets.username, secrets.password)
+client.run(secrets.token)
