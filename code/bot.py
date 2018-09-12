@@ -118,7 +118,6 @@ async def timer():#eventloop with updates all 1/10 of a second
             CupidInfoSent = True
         ######
         elif PriestActive and not PriestInfoSent:#Priest-------------------------------------------------------------------Priest
-            print("looks good")
             await client.send_message(memberDict[numToId[playerCharacter[5][0]]], PriestMessage)
             tempMessage = []
             for i in range(N):
@@ -157,7 +156,7 @@ async def timer():#eventloop with updates all 1/10 of a second
                 for i in range(N):
                     tempMessage.append(str(i+1) + ": " +memberDict[players[i]].name + "\n")
                 s = ''.join(tempMessage)
-                await client.send_message(memberDict[Werwolfs[i]],s)
+                await client.send_message(memberDict[playerCharacter[0][i]],s)
             WinfoSent = True
 
         await asyncio.sleep(0.1)
@@ -174,10 +173,10 @@ async def countdown(t,times,channel):#t = time // times = repetitions of t // ch
         await asyncio.sleep(t)
         await client.send_message(channel, str(t*times - i*t) + " seconds left")
 
-async def WMessageRelay(message,sender,Werwolfs):#sends all messages to the werwolfs // sender member which sends the message//message //Werwolfs list of id of werwolfs
-    for i in range(len(Werwolfs)):
-        if sender.id != Werwolfs[i] :#prevents returning of the message to the sender
-            await client.send_message(memberDict[Werwolfs[i]],sender.name + ": " + message)
+async def WMessageRelay(message,sender):#sends all messages to the werwolfs // sender member which sends the message//message //Werwolfs list of id of werwolfs
+    for i in range(len(playerCharacter[0])):
+        if sender.id != playerCharacter[0][i] :#prevents returning of the message to the sender
+            await client.send_message(memberDict[playerCharacter[0][i]],sender.name + ": " + message)
 
 def checkDeath():
     #Lovers
@@ -253,17 +252,16 @@ async def on_message(message):
         if(message.content.lower()=="!help"):
             await client.send_message(message.channel,str(helpmessage))
         if(Wdisc):
-            for i in range(aWerewolfs):
-                Werwolfs=[1,2,3]
+            for i in playerCharacter[0]:
 
-                if(message.author.id == Werwolfs[i]):#TODO replace Werwolfs
-                    WMessageRelay(message.content,message.author,Werwolfs)
+                if(message.author.id == numToId[i]):#TODO replace Werwolfs
+                    WMessageRelay(message.content,message.author, playerCharacter[0])
 
         elif Wvoting:# TODO: voting without mentions
             for i in range(aWerewolfs):
-                if(message.author.id == Werwolfs[i]):
+                if(message.author.id == playerCharacter[0][i]):
                     if isInt(message.content):
-                        WvotingList[i] = True;
+                        WvotingList[i] = True
                         Wvotes[int(message.content)]+=1
 
                 #    if(len(message.mentions)==1):
@@ -276,7 +274,6 @@ async def on_message(message):
 
                 couple = list(map(int,message.content.split(" "))) #not checked for wrong input
                 #send message to couple so they know who is their couple
-                print(couple)
 
                 for a in range(len(couple)):
                     couple[a] -= 1
@@ -344,7 +341,6 @@ async def distributeCharacters():
 
     N = aMembers - 1
     count = 0
-    print(aMembers, aRolls, aWerewolfs, len(playerCharacter))
 
     for a in members:
         if a.id == client.user.id:
@@ -353,16 +349,13 @@ async def distributeCharacters():
         numToId[count] = a.id
         memberDict[a.id] = a
         ran = int(random.random() * datetime.now().microsecond) % (aMembers - 1)  # pick a random role for this player
-        print(occupated, ran)
 
         while occupated[ran]:  # if this roll is already taken, look for another one
             ran = int(random.random() * datetime.now().microsecond) % (aMembers - 1)
-            print(ran)
 
         occupated[ran] = True
 
         if ran >= 7 + aWerewolfs:
-            print("why")
             if len(playerCharacter[8]) == 0:
                 playerCharacter[8] = [count]
             else:
@@ -427,7 +420,6 @@ async def story_first_night():
         await client.send_message(channelPriest, "Choose someone, who will be blessed for all nights!")
         PriestActive = True
 
-
         if aRolls >= 7 - aWerewolfs:
             channelMidwife = memberDict[numToId[playerCharacter[6][0]]]
 
@@ -439,32 +431,56 @@ async def story_first_night():
             await client.send_message(channelMidwife, "Look at those sweet villagers, which one do you want to make to twins?")
             MidwifeActive = True
 
+            while MidwifeActive:
+                await asyncio.sleep(0.1)
+        else:
+            while PriestActive:
+                await asyncio.sleep(0.1)
+    else:
+        while CupidActive:
+            await asyncio.sleep(0.1)
+
 
 async def story_night():
-    print("Works so far")
-    channelWerewolf = [memberDict[numToId[playerCharacter[0][0]]]]
+    channelWerewolfs = [memberDict[numToId[playerCharacter[0][0]]]]
     channelSeer = memberDict[numToId[playerCharacter[1][0]]]
     channelWitch = memberDict[numToId[playerCharacter[3][0]]]
 
     for a in range(aWerewolfs - 1):
-        channelWerewolf.append(client.get_channel(numToId[playerCharacter[0][a + 1]]))
+        channelWerewolfs.append(client.get_channel(numToId[playerCharacter[0][a + 1]]))
+
+    if aRolls >= 8 - aWerewolfs:
+        channelVillageBicycle = memberDict[numToId[playerCharacter[7][0]]]
+        await client.send_message(channel, "The Village Bicycle is looking for a new place to stay this night:smirk:")
+        #await client.start_private_message(channelVillageBicycle)
+        await client.send_message(channelVillageBicycle, "It's getting boring in this, don't you want to look for another one?:smirk:")
+        VillageBicycleActive = True
+
+        while VillageBicycleActive:
+            await asyncio.sleep(0.1)
+
+    await client.send_message(channel, "I suppose it would be better if you stay at home, **the Werewolfs are coming!**")
+
+    for werewolf in channelWerewolfs:
+        client.send_message(werewolf, "It smells of human flesh here, aren't you getting hungry?:yum:")
+
+    Wdisc = True
+
+    while Wdisc or Wvotes:
+        await asyncio.sleep(0.1)
 
     await client.send_message(channel, "Be quite, the Seer is having a vision!")
     #await client.start_private_message(channelSeer)
     await client.send_message(channelSeer, "Of which person do you want to know if he or she is a Werewolf?")
     SeerActive = True
 
+    while SeerActive:
+        await asyncio.sleep(0.1)
+
     await client.send_message(channel, "Hurry up, I can see the witch just behind this chimney!")
     #await client.start_private_message(channelWitch)
     await client.send_message(channelWitch, "The Person %s is dying, do you want to give him a second chance or maybe even kill someone else as well?", name)
     WitchActive = True
-
-    if aRolls >= 8 - aWerewolfs:
-        channelVillageBicycle = memberDict[numToId[playerCharacter[6][0]]]
-        await client.send_message(channel, "The Village Bicycle is looking for a new place to stay this night:smirk:")
-        #await client.start_private_message(channelVillageBicycle)
-        await client.send_message(channelVillageBicycle, "It's getting boring in this, don't you want to look for another one?.smirk:")
-        VillageBicycleActive = True
 
 
 async def story_day():
