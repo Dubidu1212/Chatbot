@@ -31,7 +31,7 @@ MidwifeActive = False
 twins = []
 MidwifeMessage = "Type the two numbers of your chosen ones seperated by a space please"
 ###
-###Vilage Bycicle
+###Vilage Bicycle
 BicycleVisit = 0  # playerNumber of person visited
 BicycleActive = False
 BicycleInfoSent = False
@@ -298,18 +298,20 @@ async def on_message(message):
 
                 await client.send_message(memberDict[numToId[couple[0]]],"your love is " + memberDict[numToId[couple[1]]].name)
                 await client.send_message(memberDict[numToId[couple[1]]],"your love is " + memberDict[numToId[couple[0]]].name)
-                await client.send_message(message.channel,"CUPID")
+                await client.send_message(message.channel,"Good choice! I think you'll be invited to the wedding!")
                 CupidActive = False
         elif PriestActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[5][0]]:
-
                 blessed = int(message.content) - 1
-                print(blessed + 1)
+                if blessed == players[message.author.id]:
+                    await client.send_message(message.channel, "Are you blessing yourself?? Christians should 'Love your neighbor as yourself'!")
+                    await client.send_message(message.channel, "Bless someone else!")
+                    return
+
                 await client.send_message(message.channel,"PRIEST")
                 PriestActive = False
         elif MidwifeActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[6][0]]:
-                #yolo
                 twins = list(map(int,message.content.split(" ")))
 
                 for a in range(len(twins)):
@@ -323,17 +325,17 @@ async def on_message(message):
         elif SeerActive:
             if message.author.id == numToId[playerCharacter[1][0]]:
                 temps = "not "
-                if message.content in playerCharacter[0]:
+                if int(message.content) - 1 in playerCharacter[0]:
                     temps = ""
                 await client.send_message(message.channel,memberDict[numToId[int(message.content)]].name + " is " + temps + "a werewolf")
                 SeerActive = False
         elif HunterActive:
             if message.author.id == numToId[playerCharacter[4][0]]:
-                await client.send_message(message.channel,"With your last breath you shoot through %s's heart", memberDict[numToId[int(message.content)]].name)
-                await kill(int(message.content),False)
+                await client.send_message(message.channel, "With your last breath you shoot through %s's heart", memberDict[numToId[int(message.content)]].name)
+                await kill(int(int(message.content) - 1),False)
         elif BicycleActive:
             if message.author.id == numToId[playerCharacter[7][0]]:
-                BicycleVisit = int(message.content)
+                BicycleVisit = int(message.content) - 1
                 await client.send_message(message.channel,":smirk:")
     #if message.content.startswith():
     #    await client.send_message(message.channel,message.channel.name)
@@ -515,6 +517,42 @@ async def story_day():
     elif len(deaths) == 1:
         await client.send_message(channel, "Unfortunately one person has died. The one who had to leave us is %s", memberDict[numToId[deaths[0]]])
 #####
+
+####prove input
+def testNumberpair(input):#in: string // max = num Player
+    global N
+    a = input.split(" ")
+
+    try:
+        global b
+        b = list(map(int, a))
+    except ValueError:
+        return False
+
+    if len(b) != 2:
+        return False
+
+    if b[0] > 0 and b[0] <= N:
+        if b[1] > 0 and b[1] <= N:
+            return True
+    return False
+
+def testNumberOne(input): #based on 1
+    global N
+
+    try:
+        a = int(input)
+        if(a <= N and a > 0):
+            return True
+        return False
+    except ValueError:
+        return False
+
+def isOnline(member):
+    if member.status == discord.Status.online:
+        return True
+    return False
+####
 
 client.loop.create_task(timer())
 client.run(secrets.token)

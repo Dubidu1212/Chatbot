@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="005f92e1-37c1-4b83-919f-344942e5b0c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/witch.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/witch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/bot.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,49 +31,57 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="py" value="6" />
+          <entry key="py" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="6" />
+          <entry key="Python" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="8373" />
-          <entry key="txt" value="115" />
+          <entry key="py" value="8752" />
+          <entry key="txt" value="142" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="115" />
-          <entry key="Python" value="8373" />
+          <entry key="PLAIN_TEXT" value="142" />
+          <entry key="Python" value="8752" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7320">
-              <caret line="481" column="154" lean-forward="true" selection-start-line="481" selection-start-column="154" selection-end-line="481" selection-end-column="154" />
+            <state relative-caret-position="238">
+              <caret line="535" column="18" selection-start-line="535" selection-start-column="18" selection-end-line="535" selection-end-column="18" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
-                <marker date="1536742563157" expanded="true" signature="2209:2211" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/InputTester.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/witch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+            <state relative-caret-position="136">
+              <caret line="8" column="81" selection-start-line="8" selection-start-column="81" selection-end-line="8" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -116,7 +124,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>aRolls</find>
       <find>pries</find>
       <find>time</find>
       <find>add</find>
@@ -146,6 +153,7 @@
       <find>;</find>
       <find>villageb</find>
       <find>VillageBicycleActive</find>
+      <find>bicycle</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -156,8 +164,8 @@
       <list>
         <option value="$PROJECT_DIR$/code/game.py" />
         <option value="$PROJECT_DIR$/code/secrets.py" />
-        <option value="$PROJECT_DIR$/code/bot.py" />
         <option value="$PROJECT_DIR$/code/witch.py" />
+        <option value="$PROJECT_DIR$/code/bot.py" />
       </list>
     </option>
   </component>
@@ -321,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536742691184</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="continued WitchActive">
+      <created>1536744123005</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1536744123005</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -358,23 +373,8 @@
     <MESSAGE value="bug fixes Priest" />
     <MESSAGE value="distribute rolls finished" />
     <MESSAGE value="added werewolf's story" />
-    <option name="LAST_COMMIT_MESSAGE" value="added werewolf's story" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/bot.py</url>
-          <line>94</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/code/bot.py</url>
-          <line>271</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="continued WitchActive" />
+    <option name="LAST_COMMIT_MESSAGE" value="continued WitchActive" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Program Files/Python36/Lib/site-packages/discord/client.py">
@@ -405,21 +405,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/bot.py">
+    <entry file="file://$PROJECT_DIR$/code/witch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7320">
-          <caret line="481" column="154" lean-forward="true" selection-start-line="481" selection-start-column="154" selection-end-line="481" selection-end-column="154" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <marker date="1536742563157" expanded="true" signature="2209:2211" ph="..." />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="8" column="81" selection-start-line="8" selection-start-column="81" selection-end-line="8" selection-end-column="81" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/witch.py">
+    <entry file="file://$PROJECT_DIR$/code/InputTester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/bot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
+          <caret line="535" column="18" selection-start-line="535" selection-start-column="18" selection-end-line="535" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
