@@ -18,3 +18,7 @@ def testNumberOne(in):
         return False
     except ValueError:
         return False
+def isOnline(member):
+    if member.status == discord.Status.online:
+        return True
+    return False
