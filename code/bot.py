@@ -33,6 +33,9 @@ MidwifeMessage = "Type the two numbers of your chosen ones seperated by a space 
 ###
 ###Vilage Bycicle
 BicycleVisit = 0  # playerNumber of person visited
+BicycleActive = False
+BicycleInfoSent = False
+BicycleMessage = "Type the number of the person you want to spend yout night with"
 
 ###
 ###Seer
@@ -67,6 +70,7 @@ memberDict = {}  # key: id, value: member
 deathList = [False for i in range(N)]  # false if alive true if dead index = PlayerNumber
 deaths = []
 ###
+
 ###werewolf voting
 WinfoSent = False
 Wvoting = False
@@ -103,6 +107,10 @@ async def timer():#eventloop with updates all 1/10 of a second
     global MidwifeInfoSent
     global SeerActive
     global SeerInfoSent
+    global BicycleActive
+    global BicycleInfoSent
+
+
     global N
 
     while True:
@@ -150,6 +158,14 @@ async def timer():#eventloop with updates all 1/10 of a second
             s = ''.join(tempMessage)
             await client.send_message(memberDict[numToId[playerCharacter[4][0]]],s)
             HunterInfoSent = True
+        elif BicycleActive and not BicycleInfoSent:#Bicycle-----------------------------------------------------------Bicycle
+            await client.send_message(memberDict[numToId[playerCharacter[7][0]]],BicycleMessage)
+            tempMessage = []
+            for i in range(N):
+                tempMessage.append(str(i+1) + ": " +memberDict[numToId[i]].name + "\n")
+            s = ''.join(tempMessage)
+            await client.send_message(memberDict[numToId[playerCharacter[7][0]]],s)
+            BicycleInfoSent=True
         elif Wvoting and not WinfoSent:#Werwolfs-------------------------------------------------------------------Werewolfs
             for i in range(aWerewolfs):
                 tempMessage = []
@@ -212,6 +228,7 @@ async def on_message(message):
     global MidwifeActive
     global SeerActive
     global HunterActive
+    global BicycleActive
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
     isPrivate = False
@@ -225,6 +242,7 @@ async def on_message(message):
         global couple
         global twins
         global blessed
+        global BicycleVisit
         members = message.server.members #members
         channel = message.channel
 
@@ -280,12 +298,14 @@ async def on_message(message):
 
                 await client.send_message(memberDict[numToId[couple[0]]],"your love is " + memberDict[numToId[couple[1]]].name)
                 await client.send_message(memberDict[numToId[couple[1]]],"your love is " + memberDict[numToId[couple[0]]].name)
+                await client.send_message(message.channel,"CUPID")
                 CupidActive = False
         elif PriestActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[5][0]]:
 
                 blessed = int(message.content) - 1
                 print(blessed + 1)
+                await client.send_message(message.channel,"PRIEST")
                 PriestActive = False
         elif MidwifeActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[6][0]]:
@@ -298,7 +318,7 @@ async def on_message(message):
                 #send message to twins so they know who is their twins
                 await client.send_message(memberDict[numToId[twins[0]]],"your twin is " + memberDict[numToId[twins[1]]].name)
                 await client.send_message(memberDict[numToId[twins[1]]],"your twin is " + memberDict[numToId[twins[0]]].name)
-
+                await client.send_message(message.channel,"MIDWIFE")
                 MidwifeActive = False
         elif SeerActive:
             if message.author.id == numToId[playerCharacter[1][0]]:
@@ -309,8 +329,12 @@ async def on_message(message):
                 SeerActive = False
         elif HunterActive:
             if message.author.id == numToId[playerCharacter[4][0]]:
+                await client.send_message(message.channel,"With your last breath you shoot through %s's heart", memberDict[numToId[int(message.content)]].name)
                 await kill(int(message.content),False)
-
+        elif BicycleActive:
+            if message.author.id == numToId[playerCharacter[7][0]]:
+                BicycleVisit = int(message.content)
+                await client.send_message(message.channel,":smirk:")
     #if message.content.startswith():
     #    await client.send_message(message.channel,message.channel.name)
 #####game
@@ -454,9 +478,9 @@ async def story_night():
         await client.send_message(channel, "The Village Bicycle is looking for a new place to stay this night:smirk:")
         #await client.start_private_message(channelVillageBicycle)
         await client.send_message(channelVillageBicycle, "It's getting boring in this, don't you want to look for another one?:smirk:")
-        VillageBicycleActive = True
+        BicycleActive = True
 
-        while VillageBicycleActive:
+        while BicycleActive:
             await asyncio.sleep(0.1)
 
     await client.send_message(channel, "I suppose it would be better if you stay at home, **the Werewolfs are coming!**")
