@@ -351,6 +351,8 @@ async def distributeCharacters():
     aMembers = 0
 
     for a in members:
+        if not isOnline(a):
+            continue
         aMembers += 1
 
     if aMembers < 6:  # there must be at least 5 players
@@ -369,6 +371,9 @@ async def distributeCharacters():
     count = 0
 
     for a in members:
+        if not isOnline(a):
+            continue
+
         if a.id == client.user.id:
             continue
         players[a.id] = count  # assign a number to each player
