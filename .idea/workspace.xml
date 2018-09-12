@@ -4,7 +4,6 @@
     <list default="true" id="005f92e1-37c1-4b83-919f-344942e5b0c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/game.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +15,7 @@
     <session id="-1369372080">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
@@ -25,8 +24,8 @@
           <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.open.time.9" value="2" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -43,14 +42,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="7127" />
-          <entry key="txt" value="21" />
+          <entry key="py" value="7581" />
+          <entry key="txt" value="45" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="21" />
-          <entry key="Python" value="7127" />
+          <entry key="PLAIN_TEXT" value="45" />
+          <entry key="Python" value="7581" />
         </counts>
       </usages-collector>
     </session>
@@ -60,10 +59,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="403" column="49" selection-start-line="403" selection-start-column="49" selection-end-line="403" selection-end-column="49" />
+            <state relative-caret-position="132">
+              <caret line="151" column="74" selection-start-line="151" selection-start-column="74" selection-end-line="151" selection-end-column="74" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
+                <marker date="1536736351783" expanded="true" signature="2209:2211" ph="..." />
               </folding>
             </state>
           </provider>
@@ -72,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="164" column="146" lean-forward="true" selection-start-line="108" selection-end-line="164" selection-end-column="146" />
+            <state relative-caret-position="2703">
+              <caret line="164" column="146" selection-start-line="108" selection-end-line="164" selection-end-column="146" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <marker date="1536690679460" expanded="true" signature="6600:6602" ph="..." />
@@ -112,19 +112,30 @@
       <find>get_</find>
       <find>story_first_night</find>
       <find>+ 1</find>
-      <find>cupidMessage</find>
       <find>global</find>
       <find>N</find>
-      <find>print</find>
-      <find>print</find>
       <find>dist</find>
-      <find>CupidActive</find>
       <find>PriestActive</find>
       <find>for</find>
       <find>midwife</find>
       <find>aRolls</find>
       <find>pries</find>
       <find>time</find>
+      <find>add</find>
+      <find>cupidMessage</find>
+      <find>CupidInfoSent</find>
+      <find>CupidAc</find>
+      <find>timer</find>
+      <find>CupidActive</find>
+      <find>ok</find>
+      <find>PriestInfoSent</find>
+      <find>Pries</find>
+      <find>PriestAc</find>
+      <find>started</find>
+      <find>players</find>
+      <find>print</find>
+      <find>CupidAct</find>
+      <find>aMembers</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -141,7 +152,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
-    <option name="width" value="979" />
+    <option name="width" value="980" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -150,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -166,7 +178,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536689615930</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="bug fixes Cupid &amp; Priest">
+      <created>1536695733459</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1536695733459</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -304,19 +322,20 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="bug fixes" />
     <MESSAGE value="addded story" />
-    <option name="LAST_COMMIT_MESSAGE" value="addded story" />
+    <MESSAGE value="bug fixes Cupid &amp; Priest" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes Cupid &amp; Priest" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/bot.py</url>
-          <line>91</line>
+          <line>94</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/code/bot.py</url>
-          <line>261</line>
+          <line>273</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
@@ -330,6 +349,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="151" column="74" selection-start-line="151" selection-start-column="74" selection-end-line="151" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1536736351783" expanded="true" signature="2209:2211" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2703">
+          <caret line="164" column="146" selection-start-line="108" selection-end-line="164" selection-end-column="146" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+            <marker date="1536690679460" expanded="true" signature="6600:6602" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/secrets.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -339,27 +380,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="164" column="146" lean-forward="true" selection-start-line="108" selection-end-line="164" selection-end-column="146" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <marker date="1536690679460" expanded="true" signature="6600:6602" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/bot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="403" column="49" selection-start-line="403" selection-start-column="49" selection-end-line="403" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
   </component>
 </project>
