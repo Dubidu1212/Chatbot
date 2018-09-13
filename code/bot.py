@@ -58,10 +58,12 @@ HunterShoot = False
 HunterInfoSent = False
 ###
 ###Help
-helpmessage = ""
-with open('../resources/help.txt', 'r') as myfile:
-    helpmessage = myfile.read()
-
+helpmessage1 = ""
+helpmessage2 = ""
+with open('../resources/help1.txt', 'r') as myfile:
+    helpmessage1 = myfile.read()
+with open('../resources/help2.txt', 'r') as myfile:
+    helpmessage2 = myfile.read()
 ###
 ###Infos
 N = 0
@@ -236,8 +238,7 @@ async def WMessageRelay(message,sender):#sends all messages to the werwolfs // s
 
 def checkDeath():
 
-    global HunterShoot
-    global HunterActive
+
     global deathList
     global deaths
 
@@ -251,11 +252,7 @@ def checkDeath():
     elif deathList[BicycleVisit]:
         deathList[playerCharacter[7][0]] = True
         deaths.append(memberDict[numToId[playerCharacter[7][0]]].name)
-    #Hunter
-    elif deathList[playerCharacter[4][0]]:
-        if not HunterShoot:
-            HunterActive = True
-            HunterShoot = True
+
 
 async def kill(person,unnatural):#person: person to kill in form of PlayerNumber  // unnatural: bool if true killed by witch or werewolf
     global deaths
@@ -308,6 +305,7 @@ async def on_message(message):
     global WitchKillingInfoSent #bool
     global WitchActive
     global WitchDoingStuff
+    global GameServer
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
     isPrivate = False
@@ -320,18 +318,26 @@ async def on_message(message):
         channel = message.channel
 
         if message.content.lower() == "start" and not started:  # if the message is "started and the game isn't started yet, start it
+            GameServer = message.channel.server
+            await client.purge_from(channel)#removes earlyer messages
             mes = await distributeCharacters()
             await client.send_message(channel, mes)
             print(playerCharacter)
             if mes == "Not enough players":
                 return
             await asyncio.sleep(3)
+            for i in range(N):
+                await sleep(i)
             await story_first_night()
             x = 0
 
             while x < 1:
                 await story_night()
+                for i in range(N):
+                    await wake(i)
                 await story_day()
+                for i in range(N):
+                    await sleep(i)
                 x = 1
         ##########
         if(voting):
@@ -341,8 +347,9 @@ async def on_message(message):
                 votes[players[message.raw_mentions[0]]]+=1
     else:#private messages
         if(message.content.lower()=="!help"):
-            await client.send_message(message.author, helpmessage)
-            print("help")
+            await client.send_message(message.author, helpmessage1)
+            await client.send_message(message.author, helpmessage2)
+
         if(Wdisc):
             for i in playerCharacter[0]:
 
@@ -433,7 +440,7 @@ async def on_message(message):
             if message.author.id == numToId[playerCharacter[4][0]]:
                 if not testNumberOne(message.content):
                     return
-                await client.send_message(message.channel, "With your last breath you shoot through %s's heart", memberDict[numToId[int(message.content)]].name)
+                await client.send_message(message.channel, "With your last breath you shoot through " + memberDict[numToId[int(message.content) - 1]].name + "'s heart")
                 await kill(int(int(message.content) - 1),False)
                 HunterActive = False
         elif BicycleActive:
@@ -446,7 +453,30 @@ async def on_message(message):
                     await client.send_message(message.channel, "Choose someone else!")
                     return
 
+
                 if playerCharacter[7][0] in twins:
+                    if twins.index(playerCharacter[7][0]) == 0:
+                        if twins[1] == int(message.content)-1:
+                            await client.send_message(message.channel, "Your twin?? That's illegal!!")
+                            await client.send_message(message.channel, "Choose someone else!")
+                            return
+                        else:
+                            BicycleVisit = int(message.content) - 1
+                            await client.send_message(message.channel,":smirk:")
+                            BicycleActive = False
+                            return
+
+                    if twins.index(playerCharacter[7][0]) == 1:
+                        if twins[0] == int(message.content)-1:
+                            await client.send_message(message.channel, "Your twin?? That's illegal!!")
+                            await client.send_message(message.channel, "Choose someone else!")
+                            return
+                        else:
+                            BicycleVisit = int(message.content) - 1
+                            await client.send_message(message.channel,":smirk:")
+                            BicycleActive = False
+                            return
+
                     await client.send_message(message.channel, "Your twin?? That's illegal!!")
                     await client.send_message(message.channel, "Choose someone else!")
                     return
@@ -652,6 +682,8 @@ async def story_night():
     global Wvotes
     global WitchDoingStuff
     global name
+    global HunterShoot
+    global HunterActive
 
     channelSeer = memberDict[numToId[playerCharacter[1][0]]]
     channelWitch = memberDict[numToId[playerCharacter[3][0]]]
@@ -675,11 +707,11 @@ async def story_night():
     Wdisc = True
     for werewolf in playerCharacter[0]:
         await client.send_message(memberDict[numToId[werewolf]], "You've got 30 seconds to discuss your prey")
-    while not await WerewolfCountdown(1,10):
+    while not await WerewolfCountdown(5,3):
         await asyncio.sleep(0.1)
     Wdisc = False
     Wvoting = True
-    while not await WerewolfCountdown(1,15):# TODO: change time to 10
+    while not await WerewolfCountdown(5,2):# TODO: change time to 10
         await asyncio.sleep(0.1)
     Wvoting = False
     killed = random.choice([i for i,x in enumerate(Wvotes) if x == max(Wvotes)])
@@ -703,6 +735,13 @@ async def story_night():
     while WitchDoingStuff:
         await asyncio.sleep(0.1)
 
+    #Hunter
+    if deathList[playerCharacter[4][0]]:
+        if not HunterShoot:
+            HunterActive = True
+            HunterShoot = True
+    while HunterActive:
+        await asyncio.sleep(0.1)
 
 async def isDead(playerNumber):
     return deathList[playerNumber]
@@ -714,8 +753,13 @@ async def story_day():
     global deaths
     deaths = list(set(deaths))
 
+    for a in range(N):
+        if deathList[a]:
+            await makeDead(a)
+
+
     if not deaths:
-        await client.send_message(channel, "Let's make a party, nobody has died tonight!")
+        await client.send_message(channel, "Let's make a party, nobody has died tonight!:tada:")
     elif len(deaths) == 1:
         await client.send_message(channel, "Unfortunately one person has died. The one who had to leave us is " + deaths[0])
     else:
@@ -726,7 +770,7 @@ async def story_day():
                 temps += deaths[i]
                 temps += ", "
                 t = i
-        t+=1
+            t+=1
         temps += deaths[t]
         temps += " and "
         temps += deaths[t+1]
@@ -764,6 +808,37 @@ def isOnline(member):
     if member.status == discord.Status.online:
         return True
     return False
+
+
+async def makeDead(s):#playerNumber
+    global memberDict
+    global GameServer
+    global numToId
+    await client.add_roles(memberDict[numToId[s]],discord.utils.get(GameServer.roles, name="Dead"))
+    await asyncio.sleep(0.3)
+
+async def makeAlive(s):
+    global memberDict
+    global numToId
+    global GameServer
+
+    await client.remove_roles(memberDict[numToId[s]],discord.utils.get(GameServer.roles, name="Dead"))
+    await asyncio.sleep(0.3)
+
+async def sleep(s):
+    global memberDict
+    global numToId
+    global GameServer
+
+    await client.add_roles(memberDict[numToId[s]],discord.utils.get(GameServer.roles, name="sleeping"))
+    await asyncio.sleep(0.3)
+async def wake(s):
+    global memberDict
+    global numToId
+    global GameServer
+
+    await client.remove_roles(memberDict[numToId[s]],discord.utils.get(GameServer.roles, name="sleeping"))
+    await asyncio.sleep(0.3)
 ####
 
 client.loop.create_task(timer())

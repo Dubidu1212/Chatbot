@@ -9,9 +9,10 @@ client = discord.Client()
 
 @client.event
 async def on_message(message):
-    await client.send_message(message.channel,message.author.roles[int(message.content)])
-    await client.add_roles(message.author,discord.utils.get(message.server.roles, name="Dead"))
 
+    await client.purge_from(message.channel)
+    GameServer = message.channel.server
+    await client.remove_roles(message.author,discord.utils.get(GameServer.roles, name="sleeping"))
 client.run(secrets.token)
 
 async def makeDead(s):#playerNumber
