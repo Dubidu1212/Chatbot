@@ -341,7 +341,8 @@ async def on_message(message):
                 votes[players[message.raw_mentions[0]]]+=1
     else:#private messages
         if(message.content.lower()=="!help"):
-            await client.send_message(message.channel,str(helpmessage))
+            await client.send_message(message.author, helpmessage)
+            print("help")
         if(Wdisc):
             for i in playerCharacter[0]:
 
@@ -365,6 +366,14 @@ async def on_message(message):
                 if not testNumberpair(message.content):
                     return
                 couple = list(map(int,message.content.split(" ")))
+                print(couple)
+                print(numToId)
+
+                if couple[0] == couple[1]:
+                    await client.send_message(message.author, "I've been told that " + memberDict[numToId[couple[0] - 1]].name + " is not narcisstic!")
+                    await client.send_message(message.author, "Choose two diffrent people!")
+                    return
+
                 #send message to couple so they know who is their love
 
                 for a in range(len(couple)):
@@ -395,6 +404,12 @@ async def on_message(message):
                 for a in range(len(twins)):
                     twins[a] -= 1
 
+                if twins[0] == twins[1]:
+                    print("Looks good")
+                    await client.send_message(message.author, "Seriously?? Have you ever seen someone who is his own twin??")
+                    await client.send_message(message.author, "Choose two diffrent people!")
+                    return
+
                 #send message to twins so they know who is their twins
                 await client.send_message(memberDict[numToId[twins[0]]],"Your twin is " + memberDict[numToId[twins[1]]].name)
                 await client.send_message(memberDict[numToId[twins[1]]],"Your twin is " + memberDict[numToId[twins[0]]].name)
@@ -407,6 +422,11 @@ async def on_message(message):
                     return
                 if int(message.content) - 1 in playerCharacter[0]:
                     temps = ""
+                if int(message.content) - 1 == playerCharacter[1][0]:
+                    await client.send_message(message.channel, "Yeah I don't think you're a werewolf:wink:")
+                    await client.send_message(message.channel, "Choose someone els!")
+                    return
+
                 await client.send_message(message.channel,memberDict[numToId[int(message.content)-1]].name + " is " + temps + "a werewolf")
                 SeerActive = False
         elif HunterActive:
@@ -420,12 +440,24 @@ async def on_message(message):
             if message.author.id == numToId[playerCharacter[7][0]]:
                 if not testNumberOne(message.content):
                     return
+
+                if int(message.content) - 1 == playerCharacter[7][0]:
+                    await client.send_message(message.channel, "Yourself, really?")
+                    await client.send_message(message.channel, "Choose someone else!")
+                    return
+
+                if playerCharacter[7][0] in twins:
+                    await client.send_message(message.channel, "Your twin?? That's illegal!!")
+                    await client.send_message(message.channel, "Choose someone else!")
+                    return
+
                 BicycleVisit = int(message.content) - 1
                 await client.send_message(message.channel,":smirk:")
                 BicycleActive = False
         elif WitchActive:
             if message.author.id == numToId[playerCharacter[3][0]]:
                 # TODO: Check if input is char-----------------------------------------------------------------------------------------------------------------------
+
                 #thumbsdown
                 if ord(message.content)!=128078:
                     #thumbsup
@@ -446,7 +478,6 @@ async def on_message(message):
                         WitchDoingStuff = False # TODO: Paste this on the end of healing
                 else:#thumb is down
                     await client.send_message(message.channel,"Feeling like killing someone, are you?:skull:")
-                    # TODO: doing killing stuff
                     WitchKilling = True
                     WitchActive = False
         elif WitchKilling:
