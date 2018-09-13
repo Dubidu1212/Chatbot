@@ -12,7 +12,11 @@ async def on_message(message):
 
     await client.purge_from(message.channel)
     GameServer = message.channel.server
-    await client.remove_roles(message.author,discord.utils.get(GameServer.roles, name="sleeping"))
+
+    if len(message.mentions)==1:
+        print(message.raw_mentions)
+        print(message.author.id)
+
 client.run(secrets.token)
 
 async def makeDead(s):#playerNumber
