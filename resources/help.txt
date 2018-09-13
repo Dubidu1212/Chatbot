@@ -1,43 +1,51 @@
 ===============HELP=================
 Rules:
-  You live in a small village each of the villagers gets distributed a rolle those roles are:Werwolf,Seer,Cupid,Witch,Hunter,Priest,Midwife,Village bicycle and normal villager
+  You live in a small, forgotten village in middle of a forest. Some of the villagers just seem to be villagers and are instead one of the following characters:
+  Werewolf, Seer, Cupid, Witch, Hunter, Priest, Midwife, Village Bicycle.
+
 
 Goals:
-  As every person besides werwolf the goal is to kill all the werwolfs.
-  For the werwolfs the goal is the opposite, their goal is to kill all the non-werwolf villagers
+  As a Non-Werewolf your goal is to kill all the Werewolves before yo get killed.
+  The Werewolf's goal is to eat as many villagers as possible until there are more Werewolves than Non-Werewolves
+
 The first night:
-  -Amor wakes up and makes two people fall in love
-  -Priest chooses someone to protect from Werewolfs
-  -Midwife chooses two people who become twins
+  -Cupid wakes up and makes two people fall in love forever:heartpulse:
+  -Priest chooses someone to protect someone who will never be killed at night
+  -Midwife chooses two people who become twins. Those two cuties will always be confused, so if cutie 1 would die cutie 2 dies instead and the other way around
   -Same as every night
 
-Procedure:
-  A day in a village always has the same order:
-    -Village bicycle chooses where to spend the night
-    -Werewolfs choose their target
-    -Seer chooses to kill or to heal someone
-    -daybreak
-    -the villagers discover the killed
-    -a discussion starts over whom to execute
+All nights:
+    -The Village Bicycle awakes all the nights and chooses someone with whom she will sty the night. As the the Village Bicycle is not at nome, she won't die if she would be killed, but the Village Bicycle is killed, if the person dies with whom she stays
+    -The Werewolves can chat 30 seconds long and discuss about whom they want to kill. Afterwards they get another 30 seconds to vote for their favourite meal:yum:
+    -Then the Seer awakes and can name one of the others players. The narrator will tell him whether this player is Werewolf or not.
+    -Last but not least: The Witch. She gets told who's going to die so she can judge about this person. Once in a gam she can heal the dying person as well as once she can let die once someone else too
+
+Days:
+    -The person(s) who has/have died is/are announced (if there are any)
+    -The villagers can discuss whom they want to let die. They have 3 minutes to discuss
+    -Afterwards there is time to vote for somebody
+    -The person who has the most votes is going to die
+    -If there are two or more people with the same number of votes, the narrator is going to decide who will die (randomly)
+
 Roles:
   Werewolf:
-    Gets to choose with his friends a person to kill.
+    Gets to choose with his mates one person to kill.
     The goal is to kill all non-Werewolfs.
   Seer:
     Each night sees if a chosen person is a werewolf.
   Cupid:
     Chooses two people to fall in love.
   Lover:
-    When one of the two dies the other one dies too.
+    When one of the two dies the other one dies as well.
   Witch:
-    Gets to heal and/or kill someone.
+    Can either heal the person who's dying or let him/her die or let someone die as well.
   Hunter:
     Kills someone of his choice when he dies.
   Priest:
-    Protects someone from ever dying during the night.
+    Protects someone from ever dying at night.
   Midwife:
     Gets to make two people twins.
   Twin:
-    Dies when his twin dies, but doesn't die when he himself was suposed to die.
-  Village bycicle:
-    Spends her night in someone elses house. Therefore she doesn't die when she was suposed to, but she does die when the person who she is visiting dies.
+    Dies when his twin dies, but doesn't die when he himself was supposed to die.
+  Village Bicycle:
+    Spends the night in someone else's house. Therefore she doesn't die when she was supposed to, but she does die when the person whom she is visiting dies.
