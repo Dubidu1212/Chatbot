@@ -258,15 +258,19 @@ def checkDeath():
             HunterShoot = True
 
 async def kill(person,unnatural):#person: person to kill in form of PlayerNumber  // unnatural: bool if true killed by witch or werewolf
-    bicycle = -1
-    try:
-        bicyclePerson=playerCharacter[7][0]
-    except:
-        pass
+    global deaths
+    global deathList
+    global aRolls
+
+
+    if aRolls > 7:
+        if person == playerCharacter[7][0]:
+            print("Bicycle")
+            return
     if person == blessed and unnatural:#Blessed
         print("Blessed")
-    elif person == bicyclePerson:
-        print("Bicycle")
+        return
+
     elif person in twins:#twins
         print("twins")
         if twins.index(person) == 0:
@@ -303,6 +307,7 @@ async def on_message(message):
     global WitchKilling #bool
     global WitchKillingInfoSent #bool
     global WitchActive
+    global WitchDoingStuff
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
     isPrivate = False
@@ -445,8 +450,9 @@ async def on_message(message):
                     WitchKilling = True
                     WitchActive = False
         elif WitchKilling:
+            # TODO: check input
             if message.author.id == numToId[playerCharacter[3][0]]:
-                kill(int(message.content)-1,True)
+                await kill(int(message.content)-1,True)
                 await client.send_message(message.channel,"The job is done")
                 WitchDoingStuff = False
     #if message.content.startswith():
@@ -613,6 +619,7 @@ async def story_night():
     global Wvoting
     global Wdisc
     global Wvotes
+    global WitchDoingStuff
     global name
 
     channelSeer = memberDict[numToId[playerCharacter[1][0]]]
@@ -665,13 +672,16 @@ async def story_night():
     while WitchDoingStuff:
         await asyncio.sleep(0.1)
 
+
 async def isDead(playerNumber):
     return deathList[playerNumber]
+
+
+
 async def story_day():
 
-
-
-
+    global deaths
+    deaths = list(set(deaths))
 
     if not deaths:
         await client.send_message(channel, "Let's make a party, nobody has died tonight!")
@@ -680,10 +690,12 @@ async def story_day():
     else:
         temps = ""
         t = 0
-        for i in range(len(deaths)-2):
-            temps += deaths[i]
-            temps += ", "
-            t = i
+        if len(deaths)!= 2:
+            for i in range(len(deaths)-2):
+                temps += deaths[i]
+                temps += ", "
+                t = i
+        t+=1
         temps += deaths[t]
         temps += " and "
         temps += deaths[t+1]
