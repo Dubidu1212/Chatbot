@@ -18,19 +18,19 @@ finishedSetup = True
 CupidInfoSent = False  # if list of people to select has been sent
 CupidActive = False  # when cupid is active
 couple = []  # people die together
-cupidMessage = "Type the two numbers of your chosen ones seperated by a space please"
+cupidMessage = "Type the two numbers of your chosen ones seperated by a space."
 ###
 ###Priest
 PriestInfoSent = False
 PriestActive = False
 blessed = -1  # person who cannot die in the night
-PriestMessage = "Type the number of one to bless please"
+PriestMessage = "Type the number of one to bless."
 ###
 ###Midwife
 MidwifeInfoSent = False
 MidwifeActive = False
 twins = []
-MidwifeMessage = "Type the two numbers of your chosen ones seperated by a space please"
+MidwifeMessage = "Type the two numbers of your chosen ones seperated by a space."
 ###
 ###Vilage Bicycle
 BicycleVisit = 0  # playerNumber of person visited
@@ -42,13 +42,15 @@ BicycleMessage = "Type the number of the person you want to spend your night wit
 ###Seer
 SeerInfoSent = False
 SeerActive = False
-SeerMessage = "Please type in the number of the person to perform a seeing on"
+SeerMessage = "Type in the number of the person to perform a seeing on."
 ###
 ###witch
 WitchInfoSent = False
+WitchDoingStuff = False
 WitchActive = False
-WitchMessage = "Please type in the number of the person you want to check if she is a werewolf"
-
+WitchMessage = "Type in the number of the person you want to check if she is a werewolf"
+WitchKilling = False #bool
+WitchKillingInfoSent = False #bool
 ###
 ###hunter
 HunterActive = False
@@ -69,7 +71,7 @@ characters = ["Seer", "Cupid", "Witch", "Hunter",
 players = {}  # dictionary key: player's id, value: player's number
 numToId = {}  # dictionary key: player's number, value: player's id
 memberDict = {}  # key: id, value: member
-deathList = [False for i in range(N)]  # false if alive true if dead index = PlayerNumber
+
 deaths = []
 ###
 
@@ -78,16 +80,14 @@ WinfoSent = False
 Wvoting = False
 Wdisc = False  # discussing
 aWerewolfs = 0  # anzahl wölfe
-WvotingList = [False for i in range(aWerewolfs)]  # AlreadyVoted of W
-Wvotes = [0 for i in range(N)]  # people to kill
+
 ###
 
 ###voting
 # TODO: Alle N funktionen initialisiern
 voting = False
 N = -1#number players
-votes = [0 for i in range(N)]
-AlreadyVoted = [False for i in range(N)]
+
 ###
 
 def isInt(s):
@@ -102,6 +102,8 @@ async def timer():#eventloop with updates all 1/10 of a second
     global CupidInfoSent
     global CupidActive
     global WinfoSent
+    global aWerewolfs
+    global Wvoting
     global playerCharacter
     global PriestActive
     global PriestInfoSent
@@ -111,6 +113,13 @@ async def timer():#eventloop with updates all 1/10 of a second
     global SeerInfoSent
     global BicycleActive
     global BicycleInfoSent
+    global HunterActive
+    global HunterInfoSent
+    global WitchKilling #bool
+    global WitchKillingInfoSent #bool
+    global WitchActive
+    global WitchInfoSent
+    global WitchDoingStuff#is active while witch is acting
     global N
 
     while True:
@@ -172,14 +181,24 @@ async def timer():#eventloop with updates all 1/10 of a second
             await client.send_message(memberDict[numToId[playerCharacter[4][0]]],s)
             HunterInfoSent = True
 
-        elif Wvoting and not WinfoSent:#Werwolfs-------------------------------------------------------------------Werewolfs
+        elif WitchKilling and not WitchKillingInfoSent:#Witch------------------------------------------------------WitchActive
+            await client.send_message(memberDict[numToId[playerCharacter[3][0]]], "Type the number of the one to kill")
+            tempMessage = []
+            for i in range(N):
+                tempMessage.append(str(i+1) + ": " +memberDict[numToId[i]].name + "\n")
+            s = ''.join(tempMessage)
+            await client.send_message(memberDict[numToId[playerCharacter[3][0]]],s)
+            WitchKillingInfoSent = True
+
+
+        elif Wvoting and not WinfoSent:#Werewolfs-------------------------------------------------------------------Werewolfs
             print("Wvoting")
             for i in range(aWerewolfs):
                 tempMessage = []
-                for i in range(N):
-                    tempMessage.append(str(i+1) + ": " +memberDict[players[i]].name + "\n")
+                for e in range(N):
+                    tempMessage.append(str(e+1) + ": " +memberDict[numToId[e]].name + "\n")
                 s = ''.join(tempMessage)
-                await client.send_message(memberDict[playerCharacter[0][i]],s)
+                await client.send_message(memberDict[numToId[playerCharacter[0][i]]],s)
             WinfoSent = True
         else:
             pass
@@ -216,17 +235,22 @@ async def WMessageRelay(message,sender):#sends all messages to the werwolfs // s
                 await client.send_message(memberDict[numToId[playerCharacter[0][i]]],sender.name + ": " + message)
 
 def checkDeath():
-    #Lovers
+
+    global HunterShoot
+    global HunterActive
+    global deathList
+    global deaths
+
     if deathList[couple[0]]:
         deathList[couple[1]] = True
-        deaths.append[memberDict[numToId[couple[1]]].name]
+        deaths.append(memberDict[numToId[couple[1]]].name)
     elif deathList[couple[1]]:
         deathList[couple[0]] = True
-        deaths.append[memberDict[numToId[couple[0]]].name]
+        deaths.append(memberDict[numToId[couple[0]]].name)
     #Bicycle
     elif deathList[BicycleVisit]:
         deathList[playerCharacter[7][0]] = True
-        deaths.append[memberDict[numToId[[playerCharacter[7][0]]].name]
+        deaths.append(memberDict[numToId[playerCharacter[7][0]]].name)
     #Hunter
     elif deathList[playerCharacter[4][0]]:
         if not HunterShoot:
@@ -234,23 +258,28 @@ def checkDeath():
             HunterShoot = True
 
 async def kill(person,unnatural):#person: person to kill in form of PlayerNumber  // unnatural: bool if true killed by witch or werewolf
+    bicycle = -1
+    try:
+        bicyclePerson=playerCharacter[7][0]
+    except:
+        pass
     if person == blessed and unnatural:#Blessed
         print("Blessed")
-    elif person == playerCharacter[7][0]:
+    elif person == bicyclePerson:
         print("Bicycle")
     elif person in twins:#twins
         print("twins")
         if twins.index(person) == 0:
 
             deathList[twins[1]] = True
-            deaths.append[memberDict[numToId[twins[1]]].name]
+            deaths.append(memberDict[numToId[twins[1]]].name)
         else:
             deathList[twins[0]] = True
-            deaths.append[memberDict[numToId[twins[0]]].name]
+            deaths.append(memberDict[numToId[twins[0]]].name)
 
     else:
         deathList[person] = True
-        deaths.append[memberDict[numToId[person]].name]
+        deaths.append(memberDict[numToId[person]].name)
     checkDeath()
 @client.event
 async def on_message(message):
@@ -270,6 +299,10 @@ async def on_message(message):
     global BicycleInfoSent
     global WvotingList
     global Wvotes
+    global Wvoting
+    global WitchKilling #bool
+    global WitchKillingInfoSent #bool
+    global WitchActive
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
     isPrivate = False
@@ -302,7 +335,6 @@ async def on_message(message):
                 AlreadyVoted[players[message.author.id]] = True
                 votes[players[message.raw_mentions[0]]]+=1
     else:#private messages
-
         if(message.content.lower()=="!help"):
             await client.send_message(message.channel,str(helpmessage))
         if(Wdisc):
@@ -313,13 +345,15 @@ async def on_message(message):
 
         elif Wvoting:
             for i in range(aWerewolfs):
-                if(message.author.id == playerCharacter[0][i]):
+                if(message.author.id == numToId[playerCharacter[0][i]]):
+                    print(playerCharacter[0][i],message.content)
                     if not testNumberOne(message.content):
                         return
                     if WvotingList[i] == True:
                         return
                     WvotingList[i] = True
-                    Wvotes[int(message.content)]+=1
+                    Wvotes[int(message.content)-1]+=1
+                    print(Wvotes)
 
         elif CupidActive:#perhaps add a time limit
             if message.author.id == numToId[playerCharacter[2][0]]:#if is cupid
@@ -364,11 +398,11 @@ async def on_message(message):
         elif SeerActive:
             if message.author.id == numToId[playerCharacter[1][0]]:
                 temps = "not "
-                if not testNumberOne(message.contentS):
+                if not testNumberOne(message.content):
                     return
                 if int(message.content) - 1 in playerCharacter[0]:
                     temps = ""
-                await client.send_message(message.channel,memberDict[numToId[int(message.content)]].name + " is " + temps + "a werewolf")
+                await client.send_message(message.channel,memberDict[numToId[int(message.content)-1]].name + " is " + temps + "a werewolf")
                 SeerActive = False
         elif HunterActive:
             if message.author.id == numToId[playerCharacter[4][0]]:
@@ -384,6 +418,37 @@ async def on_message(message):
                 BicycleVisit = int(message.content) - 1
                 await client.send_message(message.channel,":smirk:")
                 BicycleActive = False
+        elif WitchActive:
+            if message.author.id == numToId[playerCharacter[3][0]]:
+                # TODO: Check if input is char-----------------------------------------------------------------------------------------------------------------------
+                #thumbsdown
+                if ord(message.content)!=128078:
+                    #thumbsup
+                    if ord(message.content)!=128077:
+                        #fist
+                        if  ord(message.content)!=9994:
+                            await client.send_message(message.channel, "Are you trying to kid me?? You have to answer with :-1:,:+1: or :fist:!")
+                        else:
+                            WitchActive = False
+
+                            await client.send_message(message.channel, "You don't feel pity for this poor dude? You're such a witch!")
+                            WitchDoingStuff = False
+                    else:
+                        await client.send_message(message.channel, "Ooh you're healing, that's very kind! Maybe this this dude is your secret love?:smirk:")
+                        # TODO: remove the person from deathList if is in love remove love too
+                        WitchActive = False
+
+                        WitchDoingStuff = False # TODO: Paste this on the end of healing
+                else:#thumb is down
+                    await client.send_message(message.channel,"Feeling like killing someone, are you?:skull:")
+                    # TODO: doing killing stuff
+                    WitchKilling = True
+                    WitchActive = False
+        elif WitchKilling:
+            if message.author.id == numToId[playerCharacter[3][0]]:
+                kill(int(message.content)-1,True)
+                await client.send_message(message.channel,"The job is done")
+                WitchDoingStuff = False
     #if message.content.startswith():
     #    await client.send_message(message.channel,message.channel.name)
 #####game
@@ -392,6 +457,11 @@ async def distributeCharacters():
     global playerCharacter
     global aRolls
     global aWerewolfs
+    global deathList
+    global WvotingList
+    global Wvotes
+    global votes
+    global AlreadyVoted
 
     global started
 
@@ -418,6 +488,18 @@ async def distributeCharacters():
     occupated = [False for a in range(aMembers - 1)]  # store the characters which are already taken
 
     N = aMembers - 1
+    #####setup lists
+    deathList = [False for i in range(N)]  # false if alive true if dead index = PlayerNumber
+
+    WvotingList = [False for i in range(aWerewolfs)]  # AlreadyVoted of W
+    Wvotes = [0 for i in range(N)]  # people to kill
+
+    votes = [0 for i in range(N)]
+    AlreadyVoted = [False for i in range(N)]
+    #######
+
+
+
     count = 0
 
     for a in members:
@@ -531,12 +613,13 @@ async def story_night():
     global Wvoting
     global Wdisc
     global Wvotes
+    global name
 
     channelSeer = memberDict[numToId[playerCharacter[1][0]]]
     channelWitch = memberDict[numToId[playerCharacter[3][0]]]
 
 
-    if aRolls >= 8 - aWerewolfs:
+    if aRolls >= 8:
         channelVillageBicycle = memberDict[numToId[playerCharacter[7][0]]]
         await client.send_message(channel, "The Village Bicycle is looking for a new place to stay this night:smirk:")
         #await client.start_private_message(channelVillageBicycle)
@@ -549,18 +632,20 @@ async def story_night():
     await client.send_message(channel, "I suppose it would be better if you stay at home, **the Werewolfs are coming!**")
 
     for werewolf in playerCharacter[0]:
-        client.send_message(memberDict[numToId[werewolf]], "It smells of human flesh here, aren't you getting hungry?:yum:")
+        await client.send_message(memberDict[numToId[werewolf]], "It smells of human flesh here, aren't you getting hungry?:yum:")
 
     Wdisc = True
-
-    while not await WerewolfCountdown(5,6):
+    for werewolf in playerCharacter[0]:
+        await client.send_message(memberDict[numToId[werewolf]], "You've got 30 seconds to discuss your prey")
+    while not await WerewolfCountdown(1,10):
         await asyncio.sleep(0.1)
     Wdisc = False
     Wvoting = True
-    while not await WerewolfCountdown(2,15):# TODO: change time to 10
+    while not await WerewolfCountdown(1,15):# TODO: change time to 10
         await asyncio.sleep(0.1)
     Wvoting = False
-    kill(random.choice([i for i,x in enumerate(Wvotes)) if x == max(Wvotes)]),True)
+    killed = random.choice([i for i,x in enumerate(Wvotes) if x == max(Wvotes)])
+    await kill(killed,True)
 
 
     await client.send_message(channel, "Be quite, the Seer is having a vision!")
@@ -573,26 +658,36 @@ async def story_night():
 
     await client.send_message(channel, "Hurry up, I can see the witch just behind this chimney!")
     #await client.start_private_message(channelWitch)
-    await client.send_message(channelWitch, "The Person %s is dying, do you want to give him a second chance or maybe even kill someone else as well?", name)
+    await client.send_message(channelWitch, "The Person " + str(memberDict[numToId[killed]].name) + " is dying, do you want to give him a second chance or maybe even kill someone else as well?")
+    await client.send_message(channelWitch, "Type :-1: to kill someone else too, type :+1: to save the person or type :fist: to do nothing")
     WitchActive = True
+    WitchDoingStuff = True
+    while WitchDoingStuff:
+        await asyncio.sleep(0.1)
 
-
+async def isDead(playerNumber):
+    return deathList[playerNumber]
 async def story_day():
 
-    ########Execute deaths
-    
 
-
-
-    ########
 
 
 
     if not deaths:
         await client.send_message(channel, "Let's make a party, nobody has died tonight!")
     elif len(deaths) == 1:
-        await client.send_message(channel, "Unfortunately one person has died. The one who had to leave us is %s", memberDict[numToId[deaths[0]]])
-
+        await client.send_message(channel, "Unfortunately one person has died. The one who had to leave us is " + deaths[0])
+    else:
+        temps = ""
+        t = 0
+        for i in range(len(deaths)-2):
+            temps += deaths[i]
+            temps += ", "
+            t = i
+        temps += deaths[t]
+        temps += " and "
+        temps += deaths[t+1]
+        await client.send_message(channel,"Unfortunately some people have died. The ones who had to leave us are " + temps)
 def testNumberpair(input):#in: string // max = num Player
     global N
     a = input.split(" ")
