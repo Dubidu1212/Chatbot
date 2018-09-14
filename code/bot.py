@@ -81,6 +81,7 @@ numToId = {}  # dictionary key: player's number, value: player's id
 memberDict = {}  # key: id, value: member
 
 deaths = []
+coupleDead = False
 ###
 
 ###werewolf voting
@@ -248,17 +249,19 @@ async def WMessageRelay(message,sender):#sends all messages to the werwolfs // s
                     await client.send_message(memberDict[numToId[playerCharacter[0][i]]],sender.name + ": " + message)
 
 def checkDeath():
-
-
     global deathList
     global deaths
+    global coupleDead
 
-    if deathList[couple[0]]:
-        deathList[couple[1]] = True
-        deaths.append(memberDict[numToId[couple[1]]].name)
-    elif deathList[couple[1]]:
-        deathList[couple[0]] = True
-        deaths.append(memberDict[numToId[couple[0]]].name)
+    if not coupleDead:
+        coupleDead =  True
+        if deathList[couple[0]]:
+            deathList[couple[1]] = True
+            deaths.append(memberDict[numToId[couple[1]]].name)
+        elif deathList[couple[1]]:
+            deathList[couple[0]] = True
+            deaths.append(memberDict[numToId[couple[0]]].name)
+
     #Bicycle
     elif deathList[BicycleVisit]:
         if aRolls > 7:
@@ -776,6 +779,9 @@ async def story_night():
     Wdisc = True
     for werewolf in range(len(playerCharacter[0])):
         if not deathList[playerCharacter[0][werewolf]]:
+            await client.send_message(memberDict[numToId[playerCharacter[0][werewolf]]], "The other werewolves are:")
+            for otherw in range(len(playerCharacter[0])):
+                await client.send_message(memberDict[numToId[playerCharacter[0][werewolf]]], memberDict[numToId[playerCharacter[0][otherw]]].name)
             await client.send_message(memberDict[numToId[playerCharacter[0][werewolf]]], "You've got 30 seconds to discuss your prey")
     while not await WerewolfCountdown(5,3):
         await asyncio.sleep(0.1)

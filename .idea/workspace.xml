@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="005f92e1-37c1-4b83-919f-344942e5b0c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/vote.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/vote.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/bot.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,63 +15,67 @@
     <session id="-1369372080">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
+          <entry key="project.closed" value="18" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.10" value="2" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="2" />
-          <entry key="project.open.time.6" value="4" />
-          <entry key="project.open.time.7" value="3" />
+          <entry key="project.open.time.5" value="3" />
+          <entry key="project.open.time.6" value="5" />
+          <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="py" value="22" />
+          <entry key="py" value="29" />
+          <entry key="todo" value="1" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="22" />
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Python" value="29" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="10186" />
-          <entry key="txt" value="2284" />
+          <entry key="py" value="10314" />
+          <entry key="txt" value="2294" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="2284" />
-          <entry key="Python" value="10186" />
+          <entry key="PLAIN_TEXT" value="2294" />
+          <entry key="Python" value="10314" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9214">
-              <caret line="137" column="14" lean-forward="true" selection-start-line="137" selection-start-column="14" selection-end-line="137" selection-end-column="14" />
+            <state relative-caret-position="221">
+              <caret line="786" column="32" lean-forward="true" selection-start-line="786" selection-start-column="32" selection-end-line="786" selection-end-column="32" />
+              <folding>
+                <marker date="1536910401012" expanded="true" signature="9132:9134" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/code/vote.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/todo">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+            <state relative-caret-position="85">
+              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -87,12 +91,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>roun</find>
-      <find>Village b</find>
-      <find>werw</find>
-      <find>;</find>
-      <find>villageb</find>
-      <find>VillageBicycleActive</find>
       <find>bicycle</find>
       <find>members</find>
       <find>HUNTER</find>
@@ -117,6 +115,12 @@
       <find>twin</find>
       <find>village</find>
       <find>bicy</find>
+      <find>amem</find>
+      <find>N</find>
+      <find>set</find>
+      <find>players</find>
+      <find>wdisc</find>
+      <find>checkdea</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,9 +133,9 @@
         <option value="$PROJECT_DIR$/code/witch.py" />
         <option value="$PROJECT_DIR$/code/story.py" />
         <option value="$PROJECT_DIR$/code/secrets.py" />
-        <option value="$PROJECT_DIR$/code/bot.py" />
         <option value="$PROJECT_DIR$/resources/help.txt" />
         <option value="$PROJECT_DIR$/code/vote.py" />
+        <option value="$PROJECT_DIR$/code/bot.py" />
       </list>
     </option>
   </component>
@@ -146,7 +150,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -163,6 +166,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -337,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536831465507</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added vote story">
+      <created>1536842028174</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1536842028174</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -345,7 +356,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24983476" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24983476" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50033045" side_tool="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.3286119" />
@@ -353,7 +364,7 @@
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49966952" weight="0.33002833" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49966952" visible="true" weight="0.33002833" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -380,7 +391,19 @@
     <MESSAGE value="debugging Village Bicycle" />
     <MESSAGE value="finished help.py" />
     <MESSAGE value="added prove" />
-    <option name="LAST_COMMIT_MESSAGE" value="added prove" />
+    <MESSAGE value="added vote story" />
+    <option name="LAST_COMMIT_MESSAGE" value="added vote story" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/code/bot.py</url>
+          <line>783</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Program Files/Python36/Lib/site-packages/discord/client.py">
@@ -391,13 +414,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/InputTester.py" />
-    <entry file="file://$PROJECT_DIR$/code/witch.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="26" column="81" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files/Anaconda3/Lib/asyncio/events.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -426,18 +442,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-889">
-          <caret line="83" column="30" selection-start-line="83" selection-start-column="29" selection-end-line="83" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/story.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/code/story.py" />
+    <entry file="file://$PROJECT_DIR$/resources/help.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/vote.py" />
+    <entry file="file://$PROJECT_DIR$/code/witch.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="81" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/secrets.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -446,24 +468,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/help.txt">
+    <entry file="file://$PROJECT_DIR$/code/return.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/kill.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/game.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="17">
+          <caret line="83" column="30" selection-start-line="83" selection-start-column="29" selection-end-line="83" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/build.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/todo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9214">
-          <caret line="137" column="14" lean-forward="true" selection-start-line="137" selection-start-column="14" selection-end-line="137" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/vote.py">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+          <caret line="786" column="32" lean-forward="true" selection-start-line="786" selection-start-column="32" selection-end-line="786" selection-end-column="32" />
+          <folding>
+            <marker date="1536910401012" expanded="true" signature="9132:9134" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
