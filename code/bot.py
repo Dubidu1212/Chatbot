@@ -51,6 +51,8 @@ WitchActive = False
 WitchMessage = "Type in the number of the person you want to check if she is a werewolf"
 WitchKilling = False #bool
 WitchKillingInfoSent = False #bool
+WitchKilled=False
+WitchHealed=False
 ###
 ###hunter
 HunterActive = False
@@ -90,7 +92,8 @@ aWerewolfs = 0  # anzahl wölfe
 ###
 
 ###voting
-# TODO: Alle N funktionen initialisiern
+
+
 voting = False
 N = -1#number players
 
@@ -218,7 +221,7 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-debugTime = 3
+debugTime = 1
 
 async def countdown(t,times,ch):#t = time // times = repetitions of t // channel = channel on whitch countdown is sent
     for i in range(times-1):
@@ -319,6 +322,8 @@ async def on_message(message):
     global AlreadyVoted
     global deaths
     global deathList
+    global WitchHealed
+    global WitchKilled
 
     if(message.author.id == client.user.id):#used so bot doesnt react to own messages
         return
@@ -395,7 +400,7 @@ async def on_message(message):
         if(Wdisc):
             for i in playerCharacter[0]:
 
-                if(message.author.id == numToId[i]):#TODO replace Werwolfs
+                if(message.author.id == numToId[i]):
                     await WMessageRelay(message.content,message.author)
 
         elif Wvoting:
@@ -529,6 +534,7 @@ async def on_message(message):
                     #thumbsup
                     if ord(message.content)!=128077:
                         #fist
+                        #last<
                         if  ord(message.content)!=9994:
                             await client.send_message(message.channel, "Are you trying to kid me?? You have to answer with :-1:,:+1: or :fist:!")
                         else:
@@ -538,9 +544,15 @@ async def on_message(message):
                             WitchDoingStuff = False
                     else:
                         await client.send_message(message.channel, "Ooh you're healing, that's very kind! Maybe this this dude is your secret love?:smirk:")
-                        # TODO: remove the person from deathList if is in love remove love too
+                        if WitchHealed:
+                            await client.send_message(message.channel,"Oh no! You've run out of elixir")
+                            WitchDoingStuff = False
+                            return
+                        #remove the person from deathList if is in love remove love too
                         WitchActive = False
+                        WitchHealed = True
                         #last
+
                         deathList[killed] = False
                         if killed in couple:
                             deathList[couple[1]] = False
@@ -548,9 +560,14 @@ async def on_message(message):
                             deaths = [i for i in deaths if i != memberDict[numToId[couple[1]]].name]
                             deaths = [i for i in deaths if i != memberDict[numToId[couple[0]]].name]
                         deaths = [i for i in deaths if i != memberDict[numToId[killed]].name]
-                        WitchDoingStuff = False # TODO: Paste this on the end of healing
+                        WitchDoingStuff = False
                 else:#thumb is down
+                    if WitchKilled:
+                        await client.send_message(message.channel,"WITCH NOT KILLING")# TODO:
+                        WitchDoingStuff = False
+                        return
                     await client.send_message(message.channel,"Feeling like killing someone, are you?:skull:")
+                    WitchKilled = True
                     WitchKilling = True
                     WitchActive = False
         elif WitchKilling:
@@ -770,7 +787,7 @@ async def story_night():
     killed = random.choice([i for i,x in enumerate(Wvotes) if x == max(Wvotes)])
     await kill(killed,True)
 
-    if not deathList[playerCharacter[1][0]]:
+    if not isLateDead(playerCharacter[1][0]):
         await client.send_message(channel, "Be quite, the Seer is having a vision!")
         #await client.start_private_message(channelSeer)
         await client.send_message(channelSeer, "Of which person do you want to know if he or she is a Werewolf?")
@@ -779,7 +796,7 @@ async def story_night():
     while SeerActive:
         await asyncio.sleep(0.1)
 
-    if not deathList[playerCharacter[3][0]]:
+    if not isLateDead(playerCharacter[3][0]):
         await client.send_message(channel, "Hurry up, I can see the Witch just behind this chimney!")
         #await client.start_private_message(channelWitch)
         # TODO: Make gender neutral
@@ -869,17 +886,20 @@ async def story_day():
 
     await client.send_message(channel,"Vote now!")
     voting = True
-    while not await countdown(5,6,channel):
-        voting = True
+    while not await countdown(5,5,channel):
+
         await asyncio.sleep(0.1)
-    await asyncio.sleep(0.5)
+    while not await countdown(1,5,channel):
+        await asyncio.sleep(0.1)
     voting= False
+    await client.send_message(channel,"1 second left")
+    await asyncio.sleep(1)
     await client.send_message(channel,"Stop voting plese")
     print(votes)
     executed = random.choice([i for i,x in enumerate(votes) if x == max(votes)])#playerNumber
     print(executed)
     await client.send_message(channel,memberDict[numToId[executed]].name + " has been hanged on the village square.")
-    # TODO: message who has been executed
+
     await kill(executed,False)
     if(aRolls>4):
         if deathList[playerCharacter[4][0]]:
@@ -973,6 +993,7 @@ async def wake(s):
     await client.remove_roles(memberDict[numToId[s]],discord.utils.get(GameServer.roles, name="sleeping"))
     await asyncio.sleep(0.3)
 ####
+
 
 client.loop.create_task(timer())
 client.run(secrets.token)

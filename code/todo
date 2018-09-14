@@ -1,7 +1,11 @@
-print list daily
-add dead to end of list
-test if Dead
-add info when hunter kills during Day
-add info when couple gets killed during Day
-vote now info Wdiscussion
-fix voting stopping 10 second to early
+[ ]print list daily
+[ ]add dead to end of list
+[ ]test if Dead
+[ ]add info when hunter kills during Day
+[ ]add info when couple gets killed during Day
+[ ]vote now info Wdiscussion
+[ ]fix voting stopping 10 second to early
+[ ]add function where you can unsleep
+[X]Witch kills only once not yet tested
+[x]Witch only heals once not yet tested
+[ ]Print other werewolfes
