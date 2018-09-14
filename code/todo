@@ -9,3 +9,5 @@
 [X]Witch kills only once not yet tested
 [x]Witch only heals once not yet tested
 [ ]Print other werewolfes
+
+await client.send_message(channel, "I know some of you are suspecting certain villagers to be a werewolf. Now you have the opportunity the vote for someone whom you want to kill. But first, convince the others of your suspicion!")
