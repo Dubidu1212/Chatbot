@@ -11,4 +11,4 @@
 [x]Print other werewolfes
 
 await client.send_message(channel, "I know some of you are suspecting certain villagers to be a werewolf. Now you have the opportunity the vote for someone whom you want to kill. But first, convince the others of your suspicion!")
-await client.send_message(channelHunter, "Some kreep has killed you while you were sleeping! Hurry up you can still shoot once maybe you'll catch him")
+await client.send_message(channelHunter, "Some creep has killed you while you were sleeping! Hurry up you can still shoot once maybe you'll catch him!")
