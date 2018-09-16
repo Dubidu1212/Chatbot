@@ -1,12 +1,14 @@
 # Chatbot
 This is a Discord Chatbot for the popular camp game werewolfs.
 # Setup
+0. Install python 3.6 (Important as of now 3.7 does not work)
+0.1 pip install discordpy (there might be more just look at the imports in bot.py)
 1. Download repository
 2. Create a discord-bot on the discord website
 3. Create secrets.py in /code 
 4. add token from discord-bot
 5. join bot to your server:
-     https://discordapp.com/oauth2/authorize?client_id=<Bot_Client_ID>&scope=bot&permissions=2146958839
+     "https://discordapp.com/oauth2/authorize?client_id=<Bot_Client_ID>&scope=bot&permissions=2146958839"
      replace "Bot_Client_ID" with your bot client id (wow)
 6. Make a chat on your server in whitch public messages are sent
 7. Add roles "sleeping" and "Dead"
@@ -19,3 +21,6 @@ If there are any problems pleas let us know so we can fix them
 This project was realised during the "fascinating informatics week" of schweizer jugend-forscht.
 The creators are Gian-Andrea Cantinello and Raphael Zumbrunn
 Feel free to develop the project further but please add the credits.
+# attributions
+This project uses discordpy by Rapptz /MIT
+link to Repository:https://github.com/Rapptz/discord.py/
