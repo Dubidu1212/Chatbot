@@ -1,5 +1,5 @@
 # Chatbot
-
+This is a Discord Chatbot for the popular camp game werewolfs.
 # Setup
 1. Download repository
 2. Create a discord-bot on the discord website
@@ -14,7 +14,8 @@
 9. Make sure that all people who are online want to play (might be changed in the future)
 10. Write "start" in the main chat.
 11. Enjoy :D
+If there are any problems pleas let us know so we can fix them
 # Credits
 This project was realised during the "fascinating informatics week" of schweizer jugend-forscht.
-The creator are Gian-Andrea Cantinello and Raphael Zumbrunn
+The creators are Gian-Andrea Cantinello and Raphael Zumbrunn
 Feel free to develop the project further but please add the credits.
