@@ -686,7 +686,7 @@ async def distributeCharacters():
     for a in members:
         if not isOnline(a):
             continue
-
+        
         if a.id == client.user.id:
             continue
         await client.send_message(a,"**The game started**")
