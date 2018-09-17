@@ -3,9 +3,13 @@
 [ ]test if Dead
 [ ]add info when hunter kills during Day
 [ ]add info when couple gets killed during Day
-[ ]vote now info Wdiscussion
-[ ]fix voting stopping 10 second to early
+[X]vote now info Wdiscussion
+[X]fix voting stopping 10 second to early
 [ ]add function where you can unsleep
+[ ]change player selection so that player have to agree to play
+[ ]Just tick that one if you need a succes
+[ ](make addable to multiple servers)
+[ ]Clean code
 [X]Witch kills only once not yet tested
 [x]Witch only heals once not yet tested
 [x]Print other werewolfes
